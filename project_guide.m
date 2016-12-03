@@ -62,6 +62,8 @@ guidata(hObject, handles);
 % uiwait(handles.figure1);
 
 % myInit
+global globalHandles
+globalHandles=handles;
 axes(handles.axes1);
 ylim([-1, 0]);
 
@@ -162,21 +164,38 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 value = get(handles.listbox2, 'Value');
 
+axes(handles.axes2);
+cla
+
 axes(handles.axes1);
-printLatex('salam');
+cla
+
+x0 = str2double(get(handles.editLower,'String'));
+x1 = str2double(get(handles.editUpper,'String'));
+steps = str2double(get(handles.editStep,'String'));
+F = get(handles.editFunction,'String');
+axes(handles.axes2)
+cla
+hold on;
+xlim manual;
+fplot(@(x) 0,[x0,x1],'r--')
+fplot(F,[x0,x1],'b')
+
 
 switch value
-	case 1
-		;
-	case 2
-		;
-	case 3
-		;
-	case 4
-		;
-	case 5
-		;
+	case 1 %Bisection
+		method = chap2.bisection();
+	case 2 %Secant
+		method = chap2.secant();
+	case 3 %False-position
+		method = chap2.falsePosition();
+	case 4 %Fixed-point
+		method = chap2.fixedPoint();
+	case 5 %Newton-Raphson
+		method = chap2.newton();
 end
+sol = method.findRoot(F,x0,x1, steps, handles);
+%set(handles.textAns, 'String', sol{1})
 
 
 
@@ -220,10 +239,13 @@ end
 global texty
 texty = 0;
 function printLatex(str)
+    global globalHandles
+    axes(globalHandles.axes1);
 	global texty
 	step = 0.05;
 	text(0.1, texty-step/2, str);
 	texty = texty-step;
+    axes(globalHandles.axes2);
 
 
 

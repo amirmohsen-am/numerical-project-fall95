@@ -7,12 +7,24 @@ classdef rootFindingMethod
     end
     
     methods(Access = public)
-        
-        function solution = findRoot(obj, F, x0, x1, step,stepHandle)
+        %TODO: cleanup walkthrough cells
+        %TODO: extracting function for latex texts
+        %TODO: fix getHeader for other root methods too to handle $$
+        function solution = findRoot(obj, F, x0, x1, step, handles)
             new_x=x0;
+            texty=0;
+            folan_step = 0.05;
             walkthrough=obj.getHeader(F);
+            
+            for i=1:length(walkthrough)
+                axes(handles.axes1);
+                text(0.1, texty-folan_step/2, walkthrough{i}, 'Interpreter', 'latex');
+                texty = texty-folan_step;
+                axes(handles.axes2);
+            end
+            
             for i=1:step
-                set(stepHandle, 'String', sprintf('Step: %d',i))
+                set(handles.textStep, 'String', sprintf('Step: %d',i))
                 
                 y0 = eval(subs(F,'x',x0));
                 y1 = eval(subs(F,'x',x1));
@@ -23,7 +35,7 @@ classdef rootFindingMethod
                     delete(p1);
                 end
                 if abs(eval(subs(F,'x',new_x)))<eps
-                    set(stepHandle, 'String', sprintf('Step: %d Finished early',i));
+                    set(handles.textStep, 'String', sprintf('Step: %d Finished early',i));
                     solution={new_x, walkthrough};
                     break;
                 end
@@ -36,7 +48,12 @@ classdef rootFindingMethod
                 p0 = plot(x0,y0,'go');
                 p1 = plot(x1,y1,'go');
                 
-                walkthrough{length(walkthrough)+1}=sprintf('x_%d = %.5f', i, res(3));
+                axes(handles.axes1);
+                text(0.1, texty-folan_step/2, sprintf('$$x_{%d} = %.5f$$', i, res(3)), 'Interpreter', 'latex');
+                texty = texty-folan_step;
+                axes(handles.axes2);
+                
+%                 walkthrough{length(walkthrough)+1}=sprintf('x_%d = %.5f', i, res(3));
                 solution={res(3),walkthrough};
                 new_x = res(3);
                     

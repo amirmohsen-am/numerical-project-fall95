@@ -8,7 +8,7 @@ classdef falsePosition < chap2.rootFindingMethod
             x2 = x1 - ((x1-x0)/(y1-y0))*y1;
             y2 = eval(subs(F,'x',x2));
             
-            if abs(x0)~=Inf || abs(x1)~=Inf
+            if abs(x0)~=Inf && abs(x1)~=Inf
                 plot(x0:0.01:x1,eval(subs(F,'x',x0:0.01:x1)),'r');
             end
             
@@ -17,7 +17,7 @@ classdef falsePosition < chap2.rootFindingMethod
             else
                 x0=x2;
             end
-            if abs(x0)~=Inf || abs(x1)~=Inf
+            if abs(x0)~=Inf && abs(x1)~=Inf
                 plot(x0:0.01:x1,eval(subs(F,'x',x0:0.01:x1)),'g');
             end
             res=[x0,x1,x2];
