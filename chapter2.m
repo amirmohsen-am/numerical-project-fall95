@@ -1,35 +1,35 @@
-function varargout = project_guide(varargin)
-% project_guide MATLAB code for project_guide.fig
-%      project_guide, by itself, creates a new project_guide or raises the existing
+function varargout = chapter2(varargin)
+% chapter2 MATLAB code for chapter2.fig
+%      chapter2, by itself, creates a new chapter2 or raises the existing
 %      singleton*.
 %
-%      H = project_guide returns the handle to a new project_guide or the handle to
+%      H = chapter2 returns the handle to a new chapter2 or the handle to
 %      the existing singleton*.
 %
-%      project_guide('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in project_guide.M with the given input arguments.
+%      chapter2('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in chapter2.M with the given input arguments.
 %
-%      project_guide('Property','Value',...) creates a new project_guide or raises the
+%      chapter2('Property','Value',...) creates a new chapter2 or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before project_guide_OpeningFcn gets called.  An
+%      applied to the GUI before chapter2_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to project_guide_OpeningFcn via varargin.
+%      stop.  All inputs are passed to chapter2_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help project_guide
+% Edit the above text to modify the response to help chapter2
 
-% Last Modified by GUIDE v2.5 03-Dec-2016 22:13:45
+% Last Modified by GUIDE v2.5 04-Dec-2016 09:53:13
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @project_guide_OpeningFcn, ...
-                   'gui_OutputFcn',  @project_guide_OutputFcn, ...
+                   'gui_OpeningFcn', @chapter2_OpeningFcn, ...
+                   'gui_OutputFcn',  @chapter2_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,21 +44,21 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before project_guide is made visible.
-function project_guide_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before chapter2 is made visible.
+function chapter2_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to project_guide (see VARARGIN)
+% varargin   command line arguments to chapter2 (see VARARGIN)
 
-% Choose default command line output for project_guide
+% Choose default command line output for chapter2
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes project_guide wait for user response (see UIRESUME)
+% UIWAIT makes chapter2 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 % myInit
@@ -77,7 +77,7 @@ t.ColumnEditable = true;
 	
 
 % --- Outputs from this function are returned to the command line.
-function varargout = project_guide_OutputFcn(hObject, eventdata, handles) 
+function varargout = chapter2_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -290,3 +290,95 @@ function uitable1_KeyPressFcn(hObject, eventdata, handles)
 %	Character: character interpretation of the key(s) that was pressed
 %	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
 % handles    structure with handles and user data (see GUIDATA)
+
+
+
+function editFunction_Callback(hObject, eventdata, handles)
+% hObject    handle to editFunction (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editFunction as text
+%        str2double(get(hObject,'String')) returns contents of editFunction as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editFunction_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFunction (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editLower_Callback(hObject, eventdata, handles)
+% hObject    handle to editLower (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editLower as text
+%        str2double(get(hObject,'String')) returns contents of editLower as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editLower_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editLower (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editUpper_Callback(hObject, eventdata, handles)
+% hObject    handle to editUpper (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editUpper as text
+%        str2double(get(hObject,'String')) returns contents of editUpper as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editUpper_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editUpper (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editStep_Callback(hObject, eventdata, handles)
+% hObject    handle to editStep (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editStep as text
+%        str2double(get(hObject,'String')) returns contents of editStep as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editStep_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editStep (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
