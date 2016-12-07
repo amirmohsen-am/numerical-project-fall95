@@ -22,7 +22,7 @@ function varargout = chapter2(varargin)
 
 % Edit the above text to modify the response to help chapter2
 
-% Last Modified by GUIDE v2.5 04-Dec-2016 09:53:13
+% Last Modified by GUIDE v2.5 07-Dec-2016 13:17:31
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -72,6 +72,8 @@ t = handles.uitable1;
 t.ColumnWidth = 'auto';
 t.Data = zeros(str2num(S));
 t.ColumnEditable = true;
+
+
 
 
 	
@@ -382,3 +384,33 @@ function editStep_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --------------------------------------------------------------------
+function uipushtool4_ClickedCallback(hObject, eventdata, handles)
+% hObject    handle to uipushtool4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% f = getframe(handles.axes2);
+% image = frame2im(f);
+% Fig2 = figure;
+% copyobj(AxesH, Fig2);
+% hgsave(Fig2, 'myFigure.fig');
+
+F=getframe(handles.axes2); %select axes in GUI
+figure(); %new figure
+image(F.cdata); %show selected axes in new figure
+saveas(gcf, 'savedfigure', 'fig'); %save figure
+close(gcf); %and close it
+
+% --------------------------------------------------------------------
+function uipushtool7_ClickedCallback(hObject, eventdata, handles)
+% hObject    handle to uipushtool7 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+F=getframe(handles.axes1); %select axes in GUI
+figure(); %new figure
+image(F.cdata); %show selected axes in new figure
+saveas(gcf, 'savedlog', 'fig'); %save figure
+close(gcf); %and close it
