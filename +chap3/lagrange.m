@@ -16,7 +16,7 @@ function [ output_args ] = lagrange( number, Xi, Fi )
        P = P + Fi(i)*L; 
     end
     P = simplify(P);
-    output_args = P;
+    output_args = vpa(P, digits);
             
                 
 end
