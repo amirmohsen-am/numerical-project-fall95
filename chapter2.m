@@ -134,12 +134,24 @@ x0 = str2double(get(handles.editLower,'String'));
 x1 = str2double(get(handles.editUpper,'String'));
 steps = str2double(get(handles.editStep,'String'));
 F = get(handles.editFunction,'String');
+
+syms x;
+F = eval(F);
+
 axes(handles.axes2)
 cla
 hold on;
 xlim manual;
-fplot(@(x) 0,[x0,x1],'r--')
-fplot(F,[x0,x1],'b')
+
+%mohsen
+xlen = x1-x0;
+xlimit = [x0-xlen/2, x1+xlen/2];
+xlimit2 = [x0-xlen/5, x1+xlen/5];
+xlim(xlimit2);
+
+%fplot(@(x) 0,xlimit,'r--')
+plot(xlimit, [0, 0], 'r--');
+fplot(F,xlimit,'b')
 
 switch value
 	case 1 %Bisection
