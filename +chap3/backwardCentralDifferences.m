@@ -3,7 +3,7 @@ function [ output_args ] = backwardCentralDifferences( number, Xi, Fi)
     %Fi vector of Fs
     %number number of points
     
-    [Xi, Fi] = sortByX(number, Xi, Fi);
+    [Xi, Fi] = chap3.sortByX(number, Xi, Fi);
     
     syms x;
     syms r;
