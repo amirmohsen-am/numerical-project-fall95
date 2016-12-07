@@ -3,6 +3,8 @@ function [ output_args ] = backwardDifferences( number, Xi, Fi)
     %Fi vector of Fs
     %number number of points
     
+    [Xi, Fi] = sortByX(number, Xi, Fi);
+    
     syms x;
     syms r;
     P = 0;

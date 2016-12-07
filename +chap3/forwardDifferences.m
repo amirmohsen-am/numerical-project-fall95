@@ -2,6 +2,12 @@ function [ output_args ] = forwardDifferences( number, Xi, Fi)
     %Xi vector of Xs
     %Fi vector of Fs
     %number number of points
+    
+    
+
+
+    [Xi, Fi] = sortByX(number, Xi, Fi);
+  
     syms x;
     syms r;
     P = 0;
