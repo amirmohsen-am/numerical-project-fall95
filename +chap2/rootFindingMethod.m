@@ -17,10 +17,10 @@ classdef rootFindingMethod
             walkthrough=obj.getHeader(F);
             
             for i=1:length(walkthrough)
-                axes(handles.axes1);
+                axes(handles.axesLog);
                 text(0.1, texty-folan_step/2, walkthrough{i}, 'Interpreter', 'latex');
                 texty = texty-folan_step;
-                axes(handles.axes2);
+                axes(handles.axesPlot);
             end
             
             for i=1:step
@@ -30,7 +30,7 @@ classdef rootFindingMethod
                 y1 = eval(subs(F,'x',x1));
                 
                 if i > 1
-                    pause(1);
+                    pause(0.75);
                     delete(p0);
                     delete(p1);
                 end
@@ -48,10 +48,10 @@ classdef rootFindingMethod
                 p0 = plot(x0,y0,'go');
                 p1 = plot(x1,y1,'go');
                 
-                axes(handles.axes1);
+                axes(handles.axesLog);
                 text(0.1, texty-folan_step/2, sprintf('$$x_{%d} = %.5f$$', i, res(3)), 'Interpreter', 'latex');
                 texty = texty-folan_step;
-                axes(handles.axes2);
+                axes(handles.axesPlot);
                 
 %                 walkthrough{length(walkthrough)+1}=sprintf('x_%d = %.5f', i, res(3));
                 solution={res(3),walkthrough};
