@@ -1,35 +1,35 @@
-function varargout = chapter2(varargin)
-% chapter2 MATLAB code for chapter2.fig
-%      chapter2, by itself, creates a new chapter2 or raises the existing
+function varargout = chapter3(varargin)
+% chapter3 MATLAB code for chapter3.fig
+%      chapter3, by itself, creates a new chapter3 or raises the existing
 %      singleton*.
 %
-%      H = chapter2 returns the handle to a new chapter2 or the handle to
+%      H = chapter3 returns the handle to a new chapter3 or the handle to
 %      the existing singleton*.
 %
-%      chapter2('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in chapter2.M with the given input arguments.
+%      chapter3('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in chapter3.M with the given input arguments.
 %
-%      chapter2('Property','Value',...) creates a new chapter2 or raises the
+%      chapter3('Property','Value',...) creates a new chapter3 or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before chapter2_OpeningFcn gets called.  An
+%      applied to the GUI before chapter3_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to chapter2_OpeningFcn via varargin.
+%      stop.  All inputs are passed to chapter3_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help chapter2
+% Edit the above text to modify the response to help chapter3
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 13:49:07
+% Last Modified by GUIDE v2.5 07-Dec-2016 16:08:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @chapter2_OpeningFcn, ...
-                   'gui_OutputFcn',  @chapter2_OutputFcn, ...
+                   'gui_OpeningFcn', @chapter3_OpeningFcn, ...
+                   'gui_OutputFcn',  @chapter3_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,21 +44,21 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before chapter2 is made visible.
-function chapter2_OpeningFcn(hObject, eventdata, handles, varargin)
+% --- Executes just before chapter3 is made visible.
+function chapter3_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to chapter2 (see VARARGIN)
+% varargin   command line arguments to chapter3 (see VARARGIN)
 
-% Choose default command line output for chapter2
+% Choose default command line output for chapter3
 handles.output = hObject;
 
 % Update handles structure
 guidata(hObject, handles);
 
-% UIWAIT makes chapter2 wait for user response (see UIRESUME)
+% UIWAIT makes chapter3 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 % myInit
@@ -68,14 +68,22 @@ axes(handles.axes1);
 ylim([-1, 0]);
 
 S = handles.edit2.String;
+handles.edit2.String = '5';
 t = handles.uitable1;
 t.ColumnWidth = 'auto';
-t.Data = zeros(str2num(S));
+t.Data = [0 1 2 3 5; -3 0 5 12 32];
 t.ColumnEditable = true;
+%t.ColumnFormat = {'numeric', 'numeric', 'numeric', 'numeric', 'numeric'};
+
+axes(handles.axes2);
+cla
+
+data = handles.uitable1.Data;
+dataPlot(data);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = chapter2_OutputFcn(hObject, eventdata, handles) 
+function varargout = chapter3_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -84,43 +92,13 @@ function varargout = chapter2_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-% --- Executes on selection change in listbox2.
-function listbox2_Callback(hObject, eventdata, handles)
-% hObject    handle to listbox2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns listbox2 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from listbox2
-
-value = get(handles.listbox2, 'Value');
-if value == 6
-	handles.uipanel1.Visible = 'on';
-else
-	handles.uipanel1.Visible = 'off';
-end
-
-
-% --- Executes during object creation, after setting all properties.
-function listbox2_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to listbox2 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: listbox controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-value = get(handles.listbox2, 'Value');
+value = get(handles.listbox3, 'Value');
 
 axes(handles.axes2);
 global texty
@@ -130,36 +108,52 @@ cla
 axes(handles.axes1);
 cla
 
-x0 = str2double(get(handles.editLower,'String'));
-x1 = str2double(get(handles.editUpper,'String'));
-steps = str2double(get(handles.editStep,'String'));
-F = get(handles.editFunction,'String');
-axes(handles.axes2)
-cla
-hold on;
-xlim manual;
-fplot(@(x) 0,[x0,x1],'r--')
-fplot(F,[x0,x1],'b')
-
 switch value
-	case 1 %Bisection
-		method = chap2.bisection();
-	case 2 %Secant
-		method = chap2.secant();
-	case 3 %False-position
-		method = chap2.falsePosition();
-	case 4 %Fixed-point
-		method = chap2.fixedPoint();
-	case 5 %Newton-Raphson
-		method = chap2.newton();
-	case 6 %Generalized Newton-Raphson
-		;
+	case 1 %Lagrange
+		method = @chap3.lagrange;
+	case 2 %Newton Divided
+		method = @chap3.dividedDifferences;
+	case 3 %Newton Forward
+		method = @chap3.forwardDifferences;
+	case 4 %Newton Backward
+		method = @chap3.backwardDifferences;
+	case 5 %Newton Forward Central
+		method = @chap3.forwardCentralDifferences;
+	case 6 %Newton Backwrad Central
+		method = @chap3.backwardCentralDifferences;
 end
-sol = method.findRoot(F,x0,x1, steps, handles);
-%set(handles.textAns, 'String', sol{1})
+data = handles.uitable1.Data; 
 
+Xi = data(1,:);
+Yi = data(2,:);
+N = length(data);
 
+F = method(N, Xi, Yi);
+disp(F);
+printLatex2(latex(F));
 
+xl = dataPlot(data);
+fplot(F, xl, 'b');
+zoom on;
+
+function xl = dataPlot(data)
+	Xi = data(1,:);
+	Yi = data(2,:);
+	xl = [Xi(1) Xi(end)];
+	yl = [min(Yi) max(Yi)];
+	xlen = xl(2) - xl(1);
+	ylen = yl(2) - yl(1);
+	xl(1) = xl(1) - xlen/10;
+	xl(2) = xl(2) + xlen/10;
+
+	yl(1) = yl(1) - ylen/10;
+	yl(2) = yl(2) + ylen/10;
+	plot(Xi, Yi, 'kd', 'MarkerFaceColor', 'k');
+	xlim(xl);
+	ylim(yl);
+	xl(1) = xl(1) - 2*xlen;
+	xl(2) = xl(2) + 2*xlen;
+	
 
 % --- Executes on key press with focus on pushbutton1 and none of its controls.
 function pushbutton1_KeyPressFcn(hObject, eventdata, handles)
@@ -208,6 +202,9 @@ function printLatex(str)
 	texty = texty-step;
     axes(globalHandles.axes2);
 
+function printLatex2(str)
+	printLatex(strcat('$$', str, '$$'));
+
 
 
 function edit2_Callback(hObject, eventdata, handles)
@@ -225,7 +222,7 @@ if ~all(ismember(S, '.1234567890'))
 else
 	t = handles.uitable1;
 	t.ColumnWidth = 'auto';
-	t.Data = zeros(str2num(S));
+	t.Data = zeros(2, str2num(S));
 	t.ColumnEditable = true;
 end
 
@@ -251,99 +248,6 @@ function uitable1_KeyPressFcn(hObject, eventdata, handles)
 %	Character: character interpretation of the key(s) that was pressed
 %	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
 % handles    structure with handles and user data (see GUIDATA)
-
-
-
-function editFunction_Callback(hObject, eventdata, handles)
-% hObject    handle to editFunction (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of editFunction as text
-%        str2double(get(hObject,'String')) returns contents of editFunction as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function editFunction_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to editFunction (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function editLower_Callback(hObject, eventdata, handles)
-% hObject    handle to editLower (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of editLower as text
-%        str2double(get(hObject,'String')) returns contents of editLower as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function editLower_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to editLower (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function editUpper_Callback(hObject, eventdata, handles)
-% hObject    handle to editUpper (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of editUpper as text
-%        str2double(get(hObject,'String')) returns contents of editUpper as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function editUpper_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to editUpper (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-
-function editStep_Callback(hObject, eventdata, handles)
-% hObject    handle to editStep (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of editStep as text
-%        str2double(get(hObject,'String')) returns contents of editStep as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function editStep_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to editStep (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
 
 % --------------------------------------------------------------------
 function uipushtool4_ClickedCallback(hObject, eventdata, handles)
@@ -380,3 +284,44 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 %error('Pogram close');
+
+
+% --- Executes on selection change in listbox3.
+function listbox3_Callback(hObject, eventdata, handles)
+% hObject    handle to listbox3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns listbox3 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from listbox3
+
+
+% --- Executes during object creation, after setting all properties.
+function listbox3_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to listbox3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: listbox controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes when entered data in editable cell(s) in uitable1.
+function uitable1_CellEditCallback(hObject, eventdata, handles)
+% hObject    handle to uitable1 (see GCBO)
+% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)
+
+axes(handles.axes2);
+cla
+
+data = handles.uitable1.Data;
+dataPlot(data);
