@@ -64,7 +64,7 @@ guidata(hObject, handles);
 % myInit
 global globalHandles
 globalHandles=handles;
-axes(handles.axes1);
+axes(handles.axesLog);
 ylim([-1, 0]);
 
 S = handles.edit2.String;
@@ -122,12 +122,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 value = get(handles.listbox2, 'Value');
 
-axes(handles.axes2);
+axes(handles.axesPlot);
 global texty
 texty = 0;
 cla
 
-axes(handles.axes1);
+axes(handles.axesLog);
 cla
 
 x0 = str2double(get(handles.editLower,'String'));
@@ -138,7 +138,7 @@ F = get(handles.editFunction,'String');
 syms x;
 F = eval(F);
 
-axes(handles.axes2)
+axes(handles.axesPlot)
 cla
 hold on;
 xlim manual;
@@ -193,7 +193,7 @@ function slider2_Callback(hObject, eventdata, handles)
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 val = handles.slider2.Value;
-axes(handles.axes1);
+axes(handles.axesLog);
 ylim([-1+val, val]);
 
 
@@ -213,12 +213,12 @@ global texty
 texty = 0;
 function printLatex(str)
     global globalHandles
-    axes(globalHandles.axes1);
+    axes(globalHandles.axesLog);
 	global texty
 	step = 0.05;
 	text(0.1, texty-step/2, str, 'Interpreter', 'latex');
 	texty = texty-step;
-    axes(globalHandles.axes2);
+    axes(globalHandles.axesPlot);
 
 
 
@@ -362,13 +362,13 @@ function uipushtool4_ClickedCallback(hObject, eventdata, handles)
 % hObject    handle to uipushtool4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% f = getframe(handles.axes2);
+% f = getframe(handles.axesPlot);
 % image = frame2im(f);
 % Fig2 = figure;
 % copyobj(AxesH, Fig2);
 % hgsave(Fig2, 'myFigure.fig');
 
-F=getframe(handles.axes2); %select axes in GUI
+F=getframe(handles.axesPlot); %select axes in GUI
 figure(); %new figure
 image(F.cdata); %show selected axes in new figure
 saveas(gcf, 'savedfigure', 'fig'); %save figure
@@ -380,7 +380,7 @@ function uipushtool7_ClickedCallback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-F=getframe(handles.axes1); %select axes in GUI
+F=getframe(handles.axesLog); %select axes in GUI
 figure(); %new figure
 image(F.cdata); %show selected axes in new figure
 saveas(gcf, 'savedlog', 'fig'); %save figure

@@ -22,7 +22,7 @@ function varargout = chapter3(varargin)
 
 % Edit the above text to modify the response to help chapter3
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 16:08:45
+% Last Modified by GUIDE v2.5 07-Dec-2016 18:40:10
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -64,7 +64,7 @@ guidata(hObject, handles);
 % myInit
 global globalHandles
 globalHandles=handles;
-axes(handles.axes1);
+axes(handles.axesLog);
 ylim([-1, 0]);
 
 S = handles.edit2.String;
@@ -75,7 +75,7 @@ t.Data = [0 1 2 3 5; -3 0 5 12 32];
 t.ColumnEditable = true;
 %t.ColumnFormat = {'numeric', 'numeric', 'numeric', 'numeric', 'numeric'};
 
-axes(handles.axes2);
+axes(handles.axesPlot);
 cla
 
 data = handles.uitable1.Data;
@@ -98,48 +98,82 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-value = get(handles.listbox3, 'Value');
+% axes(handles.axesLog);
+% global texty
+% texty = 0;
+% cla
+if (handles.buttonMethod.SelectedObject == handles.interpolation)
+	value = handles.listbox3.Value;
 
-axes(handles.axes2);
-global texty
-texty = 0;
-cla
+	axes(handles.axesPlot);
+	cla
 
-axes(handles.axes1);
-cla
+	switch value
+		case 1 %Lagrange
+			method = @chap3.lagrange;
+		case 2 %Newton Divided
+			method = @chap3.dividedDifferences;
+		case 3 %Newton Forward
+			method = @chap3.forwardDifferences;
+		case 4 %Newton Backward
+			method = @chap3.backwardDifferences;
+		case 5 %Newton Forward Central
+			method = @chap3.forwardCentralDifferences;
+		case 6 %Newton Backwrad Central
+			method = @chap3.backwardCentralDifferences;
+	end
+	data = handles.uitable1.Data; 
 
-switch value
-	case 1 %Lagrange
-		method = @chap3.lagrange;
-	case 2 %Newton Divided
-		method = @chap3.dividedDifferences;
-	case 3 %Newton Forward
-		method = @chap3.forwardDifferences;
-	case 4 %Newton Backward
-		method = @chap3.backwardDifferences;
-	case 5 %Newton Forward Central
-		method = @chap3.forwardCentralDifferences;
-	case 6 %Newton Backwrad Central
-		method = @chap3.backwardCentralDifferences;
+	Xi = data(1,:);
+	Yi = data(2,:);
+	N = length(data);
+
+	F = method(N, Xi, Yi);
+	disp(F);
+	printLatex2(latex(F));
+
+	xl = dataPlot(data);
+	fplot(F, xl, 'b');
+
+else
+	value = handles.curveMethod.SelectedObject;
+
+	axes(handles.axesPlot);
+	cla
+
+	switch value
+		case handles.curve1
+			method = @chap3.curveFitting1;
+		case handles.curve2
+			method = @chap3.curveFitting2;
+		case handles.curve3
+			method = @chap3.curveFitting3;
+		case handles.curve4
+			method = @chap3.curveFitting4;
+		case handles.curve5
+			method = @chap3.curveFitting5;
+		case handles.curveBest
+			method = @chap3.chooseBestFitting;
+	end
+	data = handles.uitable1.Data; 
+
+	Xi = data(1,:);
+	Yi = data(2,:);
+	N = length(data);
+
+	res = method(N, Xi, Yi);
+	F = res(1);
+	disp(F);
+	printLatex2(latex(F));
+
+	xl = dataPlot(data);
+	fplot(F, xl, 'b');
 end
-data = handles.uitable1.Data; 
-
-Xi = data(1,:);
-Yi = data(2,:);
-N = length(data);
-
-F = method(N, Xi, Yi);
-disp(F);
-printLatex2(latex(F));
-
-xl = dataPlot(data);
-fplot(F, xl, 'b');
-zoom on;
 
 function xl = dataPlot(data)
 	Xi = data(1,:);
 	Yi = data(2,:);
-	xl = [Xi(1) Xi(end)];
+	xl = [min(Xi) max(Xi)];
 	yl = [min(Yi) max(Yi)];
 	xlen = xl(2) - xl(1);
 	ylen = yl(2) - yl(1);
@@ -175,7 +209,7 @@ function slider2_Callback(hObject, eventdata, handles)
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 val = handles.slider2.Value;
-axes(handles.axes1);
+axes(handles.axesLog);
 ylim([-1+val, val]);
 
 
@@ -195,16 +229,15 @@ global texty
 texty = 0;
 function printLatex(str)
     global globalHandles
-    axes(globalHandles.axes1);
+    axes(globalHandles.axesLog);
 	global texty
-	step = 0.05;
-	text(0.1, texty-step/2, str, 'Interpreter', 'latex');
+	step = 0.2;
+	text(0.05, texty-step/2, str, 'Interpreter', 'latex');
 	texty = texty-step;
-    axes(globalHandles.axes2);
+    axes(globalHandles.axesPlot);
 
 function printLatex2(str)
 	printLatex(strcat('$$', str, '$$'));
-
 
 
 function edit2_Callback(hObject, eventdata, handles)
@@ -254,13 +287,13 @@ function uipushtool4_ClickedCallback(hObject, eventdata, handles)
 % hObject    handle to uipushtool4 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% f = getframe(handles.axes2);
+% f = getframe(handles.axesPlot);
 % image = frame2im(f);
 % Fig2 = figure;
 % copyobj(AxesH, Fig2);
 % hgsave(Fig2, 'myFigure.fig');
 
-F=getframe(handles.axes2); %select axes in GUI
+F=getframe(handles.axesPlot); %select axes in GUI
 figure(); %new figure
 image(F.cdata); %show selected axes in new figure
 saveas(gcf, 'savedfigure', 'fig'); %save figure
@@ -272,7 +305,7 @@ function uipushtool7_ClickedCallback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-F=getframe(handles.axes1); %select axes in GUI
+F=getframe(handles.axesLog); %select axes in GUI
 figure(); %new figure
 image(F.cdata); %show selected axes in new figure
 saveas(gcf, 'savedlog', 'fig'); %save figure
@@ -320,8 +353,55 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
 
-axes(handles.axes2);
+axes(handles.axesPlot);
 cla
 
 data = handles.uitable1.Data;
 dataPlot(data);
+
+
+% --- Executes on button press in curve1.
+function curve1_Callback(hObject, eventdata, handles)
+% hObject    handle to curve1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of curve1
+
+
+% --- Executes during object creation, after setting all properties.
+function axesCurve_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to axesCurve (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: place code in OpeningFcn to populate axesCurve
+
+axes(hObject);
+ylim([-1, 0]);
+curves = {'$$y = \alpha e^{\beta x}$$',...
+	'$$y = a \ln b$$',...
+	'$$y = \frac{a}{x} + b$$',...
+	'$$y = \frac{1}{ax+b}$$',...
+	'$$y = \sum a_i x^i (i \leq 3)$$',...
+	'best fitted curve'};
+texty = 0;
+step = 0.16;
+for str=curves
+	text(0.05, texty-0.1, str, 'Interpreter', 'latex');
+	texty = texty-step;
+end
+
+
+% --- Executes when selected object is changed in buttonMethod.
+function buttonMethod_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in buttonMethod 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+if (hObject == handles.interpolation)
+	handles.listbox3.Visible = 'on';
+	handles.uipanel2.Visible = 'off';
+else	
+	handles.listbox3.Visible = 'off';
+	handles.uipanel2.Visible = 'on';
+end
