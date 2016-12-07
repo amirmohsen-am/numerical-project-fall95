@@ -67,11 +67,7 @@ globalHandles=handles;
 axes(handles.axesLog);
 ylim([-1, 0]);
 
-S = handles.edit2.String;
-t = handles.uitable1;
-t.ColumnWidth = 'auto';
-t.Data = zeros(str2num(S));
-t.ColumnEditable = true;
+setTable(handles);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -114,6 +110,12 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
+function generalized(data, size, handles)
+equations = data(1:size,2);
+initial_values = data(1+size:size+size,2);
+steps = str2double(get(handles.editStep, 'String'));
+chap2.generalizedNewton(equations, initial_values, steps, handles);
+
 % --- Executes on button press in pushbutton1.
 function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
@@ -143,16 +145,6 @@ cla
 hold on;
 xlim manual;
 
-%mohsen
-xlen = x1-x0;
-xlimit = [x0-xlen/2, x1+xlen/2];
-xlimit2 = [x0-xlen/5, x1+xlen/5];
-xlim(xlimit2);
-
-%fplot(@(x) 0,xlimit,'r--')
-plot(xlimit, [0, 0], 'r--');
-fplot(F,xlimit,'b')
-
 switch value
 	case 1 %Bisection
 		method = chap2.bisection();
@@ -165,8 +157,21 @@ switch value
 	case 5 %Newton-Raphson
 		method = chap2.newton();
 	case 6 %Generalized Newton-Raphson
-		;
+        S = handles.edit2.String;
+        generalized(handles.uitable1.Data, str2num(S), handles);
+		return;
 end
+
+%mohsen
+xlen = x1-x0;
+xlimit = [x0-xlen/2, x1+xlen/2];
+xlimit2 = [x0-xlen/5, x1+xlen/5];
+xlim(xlimit2);
+
+%fplot(@(x) 0,xlimit,'r--')
+plot(xlimit, [0, 0], 'r--');
+fplot(F,xlimit,'b')
+
 sol = method.findRoot(F,x0,x1, steps, handles);
 %set(handles.textAns, 'String', sol{1})
 
@@ -219,9 +224,40 @@ function printLatex(str)
 	text(0.1, texty-step/2, str, 'Interpreter', 'latex');
 	texty = texty-step;
     axes(globalHandles.axesPlot);
+	
+	min = globalHandles.slider2.Min;
+	if (texty < min-1)
+		globalHandles.slider2.Min = min*2;
+	end;
+
+function printLatex2(str)
+	printLatex(strcat('$$', str, '$$'));
 
 
 
+function setTable(handles)
+% Perhaps a small warning in WARNDLG or inside the GUI:
+S = handles.edit2.String;
+if ~all(ismember(S, '.1234567890'))
+	warndlg('Input must be numerical');
+else
+	t = handles.uitable1;
+	t.ColumnWidth = 'auto';
+    S = str2num(S);
+	t.Data = cell(S*2, 2);
+    for i=1:S
+        t.Data(i,1) = cellstr(sprintf('Equation #%d', i));
+        % t.Data(i,1) = cellstr('<html><span style="background-color: #990000;">Shit</span></html>');
+        t.Data(i+S,1) = cellstr(sprintf('a%d', i));
+    end
+    t.RowName = [];
+    t.ColumnName = [];
+    t.RowStriping = 'off';
+    t.ColumnWidth = {60 200};
+	t.ColumnEditable = [false, true];
+end
+    
+    
 function edit2_Callback(hObject, eventdata, handles)
 % hObject    handle to edit2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -229,17 +265,8 @@ function edit2_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'String') returns contents of edit2 as text
 %        str2double(get(hObject,'String')) returns contents of edit2 as a double
+setTable(handles);
 
-% Perhaps a small warning in WARNDLG or inside the GUI:
-S = hObject.String;
-if ~all(ismember(S, '.1234567890'))
-	warndlg('Input must be numerical');
-else
-	t = handles.uitable1;
-	t.ColumnWidth = 'auto';
-	t.Data = zeros(str2num(S));
-	t.ColumnEditable = true;
-end
 
 
 % --- Executes during object creation, after setting all properties.
