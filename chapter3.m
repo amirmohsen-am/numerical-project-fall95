@@ -22,7 +22,7 @@ function varargout = chapter3(varargin)
 
 % Edit the above text to modify the response to help chapter3
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 18:40:10
+% Last Modified by GUIDE v2.5 07-Dec-2016 20:02:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -404,4 +404,134 @@ if (hObject == handles.interpolation)
 else	
 	handles.listbox3.Visible = 'off';
 	handles.uipanel2.Visible = 'on';
+end
+
+
+
+function editFunction_Callback(hObject, eventdata, handles)
+% hObject    handle to editFunction (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editFunction as text
+%        str2double(get(hObject,'String')) returns contents of editFunction as a double
+axes(handles.axesPlot);
+cla
+
+data = handles.uitable1.Data;
+dataPlot(data);
+
+
+% --- Executes during object creation, after setting all properties.
+function editFunction_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFunction (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes when selected object is changed in uibuttongroup4.
+function uibuttongroup4_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in uibuttongroup4 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+if (hObject == handles.radiopoints)
+	handles.uipanelfunction.Visible = 'off';
+	handles.uipanel1.Visible = 'on';
+else	
+	handles.uipanelfunction.Visible = 'on';
+	handles.uipanel1.Visible = 'off';
+end
+
+
+
+function editMin_Callback(hObject, eventdata, handles)
+% hObject    handle to editMin (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editMin as text
+%        str2double(get(hObject,'String')) returns contents of editMin as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editMin_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editMin (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editMax_Callback(hObject, eventdata, handles)
+% hObject    handle to editMax (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editMax as text
+%        str2double(get(hObject,'String')) returns contents of editMax as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editMax_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editMax (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+N = str2num(handles.editFuncN.String);
+min = str2num(handles.editMin.String);
+max = str2num(handles.editMax.String);
+syms x;
+F = eval(handles.editFunction.String);
+data = chap3.returnPoints(N, min, max, F);
+handles.uitable1.Data = data;
+handles.edit2.String = num2str(N);
+
+axes(handles.axesPlot);
+cla
+
+dataPlot(data);
+
+function editFuncN_Callback(hObject, eventdata, handles)
+% hObject    handle to editFuncN (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editFuncN as text
+%        str2double(get(hObject,'String')) returns contents of editFuncN as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editFuncN_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editFuncN (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
 end

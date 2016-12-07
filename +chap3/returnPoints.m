@@ -1,4 +1,4 @@
-function [ n, xlar , y] = returnPoints( number, min, max, func )
+function data = returnPoints( number, min, max, func )
     
     %when the user doesnt specify some points and instead give us the
     %function, this function returns some points from [min:max] 
@@ -12,10 +12,9 @@ function [ n, xlar , y] = returnPoints( number, min, max, func )
     for i=1: number
         t = t+h;
         xlar(i) = t;
-    end
-    n = number;
+	end
     y = eval(subs(func, x, xlar));
-
+	data = [xlar; y];
 
 end
 
