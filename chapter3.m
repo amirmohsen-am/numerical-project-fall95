@@ -161,9 +161,8 @@ else
 	Yi = data(2,:);
 	N = length(data);
 
-	res = method(N, Xi, Yi);
-	F = res(1);
-	if (res(2) == -1)
+	[F, rms] = method(N, Xi, Yi);
+	if (rms == -1)
 		errordlg('Input data points are not compatible', 'Input error');
 		return;
 	end

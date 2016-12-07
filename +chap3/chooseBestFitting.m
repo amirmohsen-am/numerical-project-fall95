@@ -9,11 +9,11 @@ function [ fittedFunc, error ] = chooseBestFitting( number, xlar, y)
     
     errors = zeros(1, 5);
     funcs = sym(zeros(1,5));
-    [funcs(1), errors(1)] = curveFitting1(number, xlar, y);
-    [funcs(2), errors(2)] = curveFitting2(number, xlar, y);
-    [funcs(3), errors(3)] = curveFitting3(number, xlar, y);
-    [funcs(4), errors(4)] = curveFitting4(number, xlar, y);
-    [funcs(5), errors(5)] = curveFitting5(number, xlar, y);
+    [funcs(1), errors(1)] = chap3.curveFitting1(number, xlar, y);
+    [funcs(2), errors(2)] = chap3.curveFitting2(number, xlar, y);
+    [funcs(3), errors(3)] = chap3.curveFitting3(number, xlar, y);
+    [funcs(4), errors(4)] = chap3.curveFitting4(number, xlar, y);
+    [funcs(5), errors(5)] = chap3.curveFitting5(number, xlar, y);
     
     
     min = 100;
