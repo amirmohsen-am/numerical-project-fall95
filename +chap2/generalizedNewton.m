@@ -19,9 +19,9 @@ end
 texty=0;
 folan_step = 0.05;
 for i=1:steps+1
+    axes(handles.axesLog);
     text(0.1, texty-folan_step/2, sprintf('$Step %d:$',i-1), 'Interpreter', 'latex');
     texty = texty-folan_step;
-    axes(handles.axesLog);
     for j=1:n
         text(0.1, texty-folan_step/2, sprintf('$a_%d = %.4f$',j,initial_values(j)), 'Interpreter', 'latex');
         texty = texty-folan_step;
