@@ -161,6 +161,8 @@ else
 	Yi = data(2,:);
 	N = length(data);
 
+	global precision
+	digits(precision);
 	[F, rms] = method(N, Xi, Yi);
 	if (rms == -1)
 		errordlg('Input data points are not compatible', 'Input error');
