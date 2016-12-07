@@ -2,6 +2,9 @@ function [ output_args ] = backwardCentralDifferences( number, Xi, Fi)
     %Xi vector of Xs
     %Fi vector of Fs
     %number number of points
+    
+    [Xi, Fi] = sortByX(number, Xi, Fi);
+    
     syms x;
     syms r;
     P = 0;
@@ -34,5 +37,12 @@ function [ output_args ] = backwardCentralDifferences( number, Xi, Fi)
     P = subs(P, r, (x - Xi(ceil(number/2)))/h );
     P = simplify(P);
     output_args = P;
+    
+            
+    
+    
+    
+
+
 end
 

@@ -4,6 +4,7 @@ function [ output_args ] = dividedDifferences( number, Xi, Fi )
     %Fi vector of Fs
     %number number of points
     
+    [Xi, Fi] = sortByX(number, Xi, Fi);
     format long;
     table = zeros(number, number);
     syms x;
