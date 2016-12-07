@@ -22,7 +22,7 @@ function varargout = chapter2(varargin)
 
 % Edit the above text to modify the response to help chapter2
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 13:17:31
+% Last Modified by GUIDE v2.5 07-Dec-2016 13:49:07
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -74,10 +74,6 @@ t.Data = zeros(str2num(S));
 t.ColumnEditable = true;
 
 
-
-
-	
-
 % --- Outputs from this function are returned to the command line.
 function varargout = chapter2_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
@@ -88,53 +84,6 @@ function varargout = chapter2_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-
-
-function edit1_Callback(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: get(hObject,'String') returns contents of edit1 as text
-%        str2double(get(hObject,'String')) returns contents of edit1 as a double
-
-
-% --- Executes during object creation, after setting all properties.
-function edit1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to edit1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: edit controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
-% --- Executes on selection change in listbox1.
-function listbox1_Callback(hObject, eventdata, handles)
-% hObject    handle to listbox1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
-%        contents{get(hObject,'Value')} returns selected item from listbox1
-
-
-% --- Executes during object creation, after setting all properties.
-function listbox1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to listbox1 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    empty - handles not created until after all CreateFcns called
-
-% Hint: listbox controls usually have a white background on Windows.
-%       See ISPC and COMPUTER.
-if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
-    set(hObject,'BackgroundColor','white');
-end
-
-
 % --- Executes on selection change in listbox2.
 function listbox2_Callback(hObject, eventdata, handles)
 % hObject    handle to listbox2 (see GCBO)
@@ -143,6 +92,13 @@ function listbox2_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox2 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox2
+
+value = get(handles.listbox2, 'Value');
+if value == 6
+	handles.uipanel1.Visible = 'on';
+else
+	handles.uipanel1.Visible = 'off';
+end
 
 
 % --- Executes during object creation, after setting all properties.
@@ -183,7 +139,6 @@ xlim manual;
 fplot(@(x) 0,[x0,x1],'r--')
 fplot(F,[x0,x1],'b')
 
-
 switch value
 	case 1 %Bisection
 		method = chap2.bisection();
@@ -195,6 +150,8 @@ switch value
 		method = chap2.fixedPoint();
 	case 5 %Newton-Raphson
 		method = chap2.newton();
+	case 6 %Generalized Newton-Raphson
+		;
 end
 sol = method.findRoot(F,x0,x1, steps, handles);
 %set(handles.textAns, 'String', sol{1})
@@ -414,3 +371,10 @@ figure(); %new figure
 image(F.cdata); %show selected axes in new figure
 saveas(gcf, 'savedlog', 'fig'); %save figure
 close(gcf); %and close it
+
+% --- Executes during object deletion, before destroying properties.
+function figure1_DeleteFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+%error('Pogram close');
