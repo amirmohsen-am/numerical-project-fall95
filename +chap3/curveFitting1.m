@@ -1,6 +1,12 @@
-function [ fittedFunc,   error ] = curveFitting1( number, xlar,y)
+function [ fittedFunc,   rmserror ] = curveFitting1( number, xlar,y)
     %fittedFunc = fitted function
     %error = rms of this curve fitting
+    
+    for i = 1:number
+        if ( y(i) <= 0)
+            error('Y Values Should Be Positive. Y(%d) Is Not Positive ', i);
+        end
+    end
     
     syms x;
     X = xlar;
@@ -23,7 +29,7 @@ function [ fittedFunc,   error ] = curveFitting1( number, xlar,y)
     for i=1 : number
         Plar(i) = vpa(eval(subs(fittedFunc, x, xlar(i))), digits);
     end
-    error = rms( y-Plar );
+    rmserror = rms( y-Plar );
        
     
 

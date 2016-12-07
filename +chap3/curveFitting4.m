@@ -1,9 +1,15 @@
-function [ fittedFunc, error ] = curveFitting4( number, xlar,  y)
+function [ fittedFunc, rmserror ] = curveFitting4( number, xlar,  y)
     
 
     %fittedFunc = fitted function
     %error = rms of this curve fitting
 
+    for i = 1:number
+        if ( y(i) == 0)
+            error('Y Values Should Not Be Zero. Y(%d) Is Zero', i);
+        end
+    end
+    
     syms x;
     Y = vpa(1./y, digits);
     X = xlar;
@@ -27,7 +33,7 @@ function [ fittedFunc, error ] = curveFitting4( number, xlar,  y)
     for i=1 : number
         Plar(i) = vpa(eval(subs(fittedFunc, x, xlar(i))), digits);
     end
-    error = rms( y-Plar );
+    rmserror = rms( y-Plar );
     
     
 end

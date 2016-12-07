@@ -1,4 +1,4 @@
-function [ fittedFunc, error ] = curveFitting5( number, xlar, y)
+function [ fittedFunc, rmserror ] = curveFitting5( number, xlar, y)
     
 
     %fittedFunc = fitted function
@@ -36,7 +36,7 @@ function [ fittedFunc, error ] = curveFitting5( number, xlar, y)
     for i=1 : number
         Plar(i) = vpa(eval(subs(fittedFunc, x, xlar(i))), digits);
     end
-    error = rms( y-Plar );
+    rmserror = rms( y-Plar );
     
 end
 
