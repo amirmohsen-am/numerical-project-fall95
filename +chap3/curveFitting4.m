@@ -6,7 +6,10 @@ function [ fittedFunc, rmserror ] = curveFitting4( number, xlar,  y)
 
     for i = 1:number
         if ( y(i) == 0)
-            error('Y Values Should Not Be Zero. Y(%d) Is Zero', i);
+            %error('Y Values Should Not Be Zero. Y(%d) Is Zero', i);
+            fittedFunc = 1;
+            rmserror = -1;
+            return;
         end
     end
     

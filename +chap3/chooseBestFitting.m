@@ -2,7 +2,7 @@ function [ fittedFunc, error ] = chooseBestFitting( number, xlar, y)
     
 
     %this function is called when the user doesnt choose a function to be
-    %fitted, so we calculate the rms's of 5 different funtions and choose
+    %fitted, so we calculate the rms's of 5 different funtions and choos
     %the best
     
     syms x;
@@ -14,11 +14,14 @@ function [ fittedFunc, error ] = chooseBestFitting( number, xlar, y)
     [funcs(3), errors(3)] = curveFitting3(number, xlar, y);
     [funcs(4), errors(4)] = curveFitting4(number, xlar, y);
     [funcs(5), errors(5)] = curveFitting5(number, xlar, y);
-     
-    min = 1;
-    for i=2:5
-        if (  errors(i)< errors(min)  )
+    
+    
+    min = 100;
+    rmsError = realmax;
+    for i=1:5
+        if ( errors(i)>= 0  && errors(i) < rmsError  )
             min = i;
+            rmsError = errors(i);
         end
     end
         

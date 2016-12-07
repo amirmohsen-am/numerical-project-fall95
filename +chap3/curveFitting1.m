@@ -4,7 +4,10 @@ function [ fittedFunc,   rmserror ] = curveFitting1( number, xlar,y)
     
     for i = 1:number
         if ( y(i) <= 0)
-            error('Y Values Should Be Positive. Y(%d) Is Not Positive ', i);
+            %error('Y Values Should Be Positive. Y(%d) Is Not Positive ', i);
+            fittedFunc = 1;
+            rmserror = -1;
+            return;
         end
     end
     
