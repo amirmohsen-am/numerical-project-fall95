@@ -11,6 +11,7 @@ classdef rootFindingMethod
         %TODO: extracting function for latex texts
         %TODO: fix getHeader for other root methods too to handle $$
         function solution = findRoot(obj, F, x0, x1, step, handles)
+            global precision
             new_x=x0;
             texty=0;
             folan_step = 0.05;
@@ -49,7 +50,7 @@ classdef rootFindingMethod
                 p1 = plot(x1,y1,'go');
                 
                 axes(handles.axesLog);
-                text(0.1, texty-folan_step/2, sprintf('$$x_{%d} = %.5f$$', i, res(3)), 'Interpreter', 'latex');
+                text(0.1, texty-folan_step/2, sprintf(sprintf('$$x_{%%d} = %%.%df$$',precision), i, res(3)), 'Interpreter', 'latex');
                 texty = texty-folan_step;
                 axes(handles.axesPlot);
                 
