@@ -247,7 +247,7 @@ function printLatex(str)
 	end;
 
 function printLatex2(str)
-	printLatex(strcat('$$', str, '$$'));
+	printLatex(strcat('$', str, '$'));
 
 
 function edit2_Callback(hObject, eventdata, handles)
