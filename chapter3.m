@@ -163,6 +163,10 @@ else
 
 	res = method(N, Xi, Yi);
 	F = res(1);
+	if (res(2) == -1)
+		errordlg('Input data points are not compatible', 'Input error');
+		return;
+	end
 	disp(F);
 	printLatex2(latex(F));
 
