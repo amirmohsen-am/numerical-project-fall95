@@ -104,7 +104,7 @@ values = cell2mat(data(1,:));
 errors = cell2mat(data(2,:));
 isChopping = handles.checkbox1.Value;
 
-absError = chap1.calculate_error_normal(F, values, errors, 1, 0);
+absError = chap1.calculate_error_normal(F, values, errors, isChopping, 0);
 finalValue = chap1.calculate_value(F, values);
 relError = absError / finalValue;
 
@@ -241,3 +241,14 @@ function checkbox1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of checkbox1
+
+% --- Executes when entered data in editable cell(s) in uitable1.
+function uitable1_CellEditCallback(hObject, eventdata, handles)
+% hObject    handle to uitable1 (see GCBO)
+% eventdata  structure with the following fields (see MATLAB.UI.CONTROL.TABLE)
+%	Indices: row and column indices of the cell(s) edited
+%	PreviousData: previous data for the cell(s) edited
+%	EditData: string(s) entered by the user
+%	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
+%	Error: error string when failed to convert EditData to appropriate value for Data
+% handles    structure with handles and user data (see GUIDATA)
