@@ -1,6 +1,6 @@
 function absolute_error = calculate_absolute_error(varStr, errVarStr, isChopping)
     if(isempty(varStr) == 0)
-        if(isempty(errVarStr))
+        if(isempty(errVarStr) || strcmp(errVarStr,'NaN'))
             index_of_point = strfind(varStr, '.');
             if(isempty(index_of_point))
                 if(isChopping == 1)
