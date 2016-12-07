@@ -219,6 +219,15 @@ function printLatex(str)
 	text(0.1, texty-step/2, str, 'Interpreter', 'latex');
 	texty = texty-step;
     axes(globalHandles.axesPlot);
+	
+	min = globalHandles.slider2.Min;
+	if (texty < min-1)
+		globalHandles.slider2.Min = min*2;
+	end;
+
+function printLatex2(str)
+	printLatex(strcat('$$', str, '$$'));
+
 
 
 
