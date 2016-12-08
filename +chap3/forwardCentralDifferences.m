@@ -21,13 +21,25 @@ function [ output_args ] = forwardCentralDifferences( number, Xi, Fi)
     end
     coeff(1) = 1;
     
-    for i = 2 : number
-        k = i-1;
-        t = floor(k/2);
-        if ( mod(k,2)==0  ) 
-            coeff(i) = vpa( (coeff(i-1) *(r-t))/ (i-1), digits);
-        else
-            coeff(i) = vpa( (coeff(i-1) *(r+t))/ (i-1), digits);
+    if ( mod(number, 2) == 1)
+        for i = 2 : number
+            k = i-1;
+            t = floor(k/2);
+            if ( mod(k,2)==0  ) 
+                coeff(i) = vpa( (coeff(i-1) *(r-t))/ (i-1), digits);
+            else
+                coeff(i) = vpa( (coeff(i-1) *(r+t))/ (i-1), digits);
+            end
+        end
+    else
+        for i = 2 : number
+            k = i-1;
+            t = floor(k/2);
+            if ( mod(k,2)==0  ) 
+                coeff(i) = vpa( (coeff(i-1) *(r+t))/ (i-1), digits);
+            else
+                coeff(i) = vpa( (coeff(i-1) *(r-t))/ (i-1), digits);
+            end
         end
     end
     
@@ -36,7 +48,7 @@ function [ output_args ] = forwardCentralDifferences( number, Xi, Fi)
     end
     
     h = Xi(2) - Xi(1);
-    P = subs(P, r, (x - Xi(ceil(number/2)))/h );
+    P = subs(P, r, (x - Xi(ceil( (number+1) /2)))/h );
     P = simplify(P);
     output_args = P;
     

@@ -19,16 +19,27 @@ function [ output_args ] = backwardCentralDifferences( number, Xi, Fi)
         end
     end
     coeff(1) = 1;
-    for i = 2 : number
-        k = i-1;
-        t = floor(k/2);
-        if ( mod(k,2)==0  ) 
-            coeff(i) = vpa( (coeff(i-1) *(r+t))/ (i-1), digits);
-        else
-            coeff(i) = vpa( (coeff(i-1) *(r-t))/ (i-1), digits);
+    if ( mod(number,2)==1)
+        for i = 2 : number
+            k = i-1;
+            t = floor(k/2);
+            if ( mod(k,2)==0  ) 
+                coeff(i) = vpa( (coeff(i-1) *(r+t))/ (i-1), digits);
+            else
+                coeff(i) = vpa( (coeff(i-1) *(r-t))/ (i-1), digits);
+            end
         end
+    else
+        for i = 2 : number
+            k = i-1;
+            t = floor(k/2);
+            if ( mod(k,2)==0  ) 
+                coeff(i) = vpa( (coeff(i-1) *(r-t))/ (i-1), digits);
+            else
+                coeff(i) = vpa( (coeff(i-1) *(r+t))/ (i-1), digits);
+            end
+        end 
     end
-    
     for i = 1: number
         P = vpa(P + coeff(i) * table( floor((number + 2 - i)/2), i), digits);
     end
