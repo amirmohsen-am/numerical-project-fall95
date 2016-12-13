@@ -104,15 +104,14 @@ values = cell2mat(data(1,:));
 errors = cell2mat(data(2,:));
 isChopping = handles.checkbox1.Value;
 
-absError = chap1.calculate_error_normal(F, values, errors, isChopping, 0);
-finalValue = chap1.calculate_value(F, values);
-relError = absError / finalValue;
+[finalValue, absError, relError] = chap1.final_cal_error(F, values, errors, isChopping);
 
 syms a b c d e f
 printLatex2(strcat('Function: ', latex(eval(F))));
 printLatex2(strcat('Final Value = ', num2str(finalValue)));
 printLatex2(strcat('Absolute Error = ', num2str(absError)));
 printLatex2(strcat('Relative Error = ', num2str(relError)));
+printLatex2('');
 
 
 

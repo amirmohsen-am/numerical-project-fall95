@@ -4,6 +4,7 @@ function final_string = Parentheses2(F)
         return
     end
     i = 1;
+%     display(F);
      F = ['(' F ')'];
     lastOp = 1;
     while(isempty(F(i:length(F))) == 0)
@@ -33,17 +34,18 @@ function final_string = Parentheses2(F)
         i = i + 1;
     end
      
-    i = 1;
+    i = length(F);
     pCount = 0;
-    lastOp = 1;
-    while(isempty(F(i:length(F))) == 0)
+    lastOp = length(F);
+    while(isempty(F(1:i)) == 0)
 %          display(F);
-         if(lastOp >= i) 
-            i = i + 1;
+         if(lastOp <= i) 
+            i = i - 1;
             continue;
          end
+%          display(i);
         if(F(i) == '^')
-%                  display(F(i));
+%             display(F(i));
         
             pCount = 0;
             for j = i-1 : -1 : 1
@@ -76,10 +78,10 @@ function final_string = Parentheses2(F)
                 end
                 
             end
-            i = i + 1;
+            i = i - 2;
         end
     
-        i = i + 1;
+        i = i - 1;
     end
      
      
