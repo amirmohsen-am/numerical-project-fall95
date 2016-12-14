@@ -102,6 +102,8 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % global texty
 % texty = 0;
 % cla
+global precision
+digits(precision);
 if (handles.buttonMethod.SelectedObject == handles.interpolation)
 	value = handles.listbox3.Value;
 
@@ -161,8 +163,7 @@ else
 	Yi = data(2,:);
 	N = length(data);
 
-	global precision
-	digits(precision);
+
 	[F, rms] = method(N, Xi, Yi);
 	if (rms == -1)
 		errordlg('Input data points are not compatible', 'Input error');
@@ -182,6 +183,12 @@ function xl = dataPlot(data)
 	yl = [min(Yi) max(Yi)];
 	xlen = xl(2) - xl(1);
 	ylen = yl(2) - yl(1);
+	if (xlen == 0)
+		xlen = 1;
+	end
+	if (ylen == 0)
+		ylen = 1;
+	end
 	xl(1) = xl(1) - xlen/10;
 	xl(2) = xl(2) + xlen/10;
 
