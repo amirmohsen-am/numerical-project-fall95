@@ -22,7 +22,7 @@ function varargout = chapter3(varargin)
 
 % Edit the above text to modify the response to help chapter3
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 20:02:40
+% Last Modified by GUIDE v2.5 15-Dec-2016 02:13:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -147,7 +147,20 @@ else
 		case handles.curve1
 			method = @chap3.curveFitting1;
 		case handles.curve2
-			method = @chap3.curveFitting2;
+			index = handles.popupmenu4.Value;
+			fMethod = handles.popupmenu4.String{index};
+			switch fMethod
+				case 'ln(x)'
+					method = @chap3.curveFitting2;
+				case 'sin(x)'
+					method = @chap3.curveFitting6;
+				case 'cos(x)'
+					method = @chap3.curveFitting7;
+				case 'tan(x)'
+					method = @chap3.curveFitting8;
+				case 'cot(x)'
+					method = @chap3.curveFitting9;
+			end
 		case handles.curve3
 			method = @chap3.curveFitting3;
 		case handles.curve4
@@ -397,7 +410,7 @@ function axesCurve_CreateFcn(hObject, eventdata, handles)
 axes(hObject);
 ylim([-1, 0]);
 curves = {'$$y = \alpha e^{\beta x}$$',...
-	'$$y = a \ln b$$',...
+	'$$y = a \textbf{\emph{f(x)}} + b$$',...
 	'$$y = \frac{a}{x} + b$$',...
 	'$$y = \frac{1}{ax+b}$$',...
 	'$$y = \sum a_i x^i (i \leq 3)$$',...
@@ -418,6 +431,7 @@ function buttonMethod_SelectionChangedFcn(hObject, eventdata, handles)
 if (hObject == handles.interpolation)
 	handles.listbox3.Visible = 'on';
 	handles.uipanel2.Visible = 'off';
+	
 else	
 	handles.listbox3.Visible = 'off';
 	handles.uipanel2.Visible = 'on';
@@ -551,4 +565,41 @@ function editFuncN_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+
+% --- Executes on selection change in popupmenu4.
+function popupmenu4_Callback(hObject, eventdata, handles)
+% hObject    handle to popupmenu4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns popupmenu4 contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from popupmenu4
+
+
+% --- Executes during object creation, after setting all properties.
+function popupmenu4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to popupmenu4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes when selected object is changed in curveMethod.
+function curveMethod_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in curveMethod 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% 
+if (hObject == handles.curve2)
+	handles.popupmenu4.Visible = 'on';
+else
+	handles.popupmenu4.Visible = 'off';	
 end
