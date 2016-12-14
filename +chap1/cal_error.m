@@ -1,6 +1,6 @@
 function [value, error, relError] = cal_error(exp, input, error, isChopping)
     format long
-    syms a b c d e f eA eB eC eD eE eF
+    syms a b c d e f e_a e_b e_c e_d e_e e_f
     
     aStr = char(input(1));
     bStr = char(input(2));
@@ -23,6 +23,7 @@ function [value, error, relError] = cal_error(exp, input, error, isChopping)
     errE = chap1.calculate_absolute_error(eStr, errEStr, isChopping);
     errF = chap1.calculate_absolute_error(fStr, errFStr, isChopping);
     
+    
     A = str2double(aStr);
     B = str2double(bStr);
     C = str2double(cStr);
@@ -32,33 +33,55 @@ function [value, error, relError] = cal_error(exp, input, error, isChopping)
     
     if (errA < 0)
         A = a;
-        errA = eA;
+        errA = e_a;
     end
     
     if (errB < 0)
         B = b;
-        errB = eB;
+        errB = e_b;
     end
     
     if (errC < 0)
         C = c;
-        errC = eC;
+        errC = e_c;
     end
        
     if (errD < 0)
         D = d;
-        errD = eD;
+        errD = e_d;
     end
     
     if (errE < 0)
         E = e;
-        errE = eE;
+        errE = e_e;
     end
     
     if (errF < 0)
         F = f;
-        errF = eF;
+        errF = e_f;
     end
+    
+    
+    
+    if(isempty(char(error(1))) == 0)
+        errA = str2num(char(error(1)));
+    end
+    if(isempty(char(error(2))) == 0)
+        errB = str2num(char(error(2)));
+    end
+    if(isempty(char(error(3))) == 0)
+        errC = str2num(char(error(3)));
+    end
+    if(isempty(char(error(4))) == 0)
+        errD = str2num(char(error(4)));
+    end
+    if(isempty(char(error(5))) == 0)
+        errE = str2num(char(error(5)));
+    end
+    if(isempty(char(error(6))) == 0)
+        errF = str2num(char(error(6)));
+    end
+    
     
     values = [A;B;C;D;E;F];
     errors = [errA;errB;errC;errD;errE;errF];

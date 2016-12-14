@@ -1,6 +1,7 @@
 function [fValue, fError, fRelError] = final_cal_error(exp, input, error, isChopping)
     format long
-        
+    global precision
+   
     counter = 0;
     for i = 1 : length(exp)
         if(exp(i) == '(')
@@ -106,19 +107,19 @@ function [fValue, fError, fRelError] = final_cal_error(exp, input, error, isChop
     [fValueVal, fErrorVal, fRelErrorVal] = chap1.cal_error(exp, values, errors, isChopping);
     
     try
-        fValue = num2str(fValueVal);
+        fValue = sprintf(sprintf('%%.%df', precision), fValueVal);
     catch
         fValue = char(fValueVal);
     end
     
     try
-        fError = num2str(fErrorVal);
+        fError = sprintf(sprintf('%%.%df', precision), fErrorVal);
     catch
         fError = char(fErrorVal);
     end
     
     try
-        fRelError = num2str(fRelErrorVal);
+        fRelError = sprintf(sprintf('%%.%df', precision), fRelErrorVal)
     catch
         fRelError = char(fRelErrorVal);
     end
