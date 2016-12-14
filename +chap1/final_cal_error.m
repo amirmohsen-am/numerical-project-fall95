@@ -1,6 +1,6 @@
 function [fValue, fError, fRelError] = final_cal_error(exp, input, error, isChopping)
     format long
-    
+        
     counter = 0;
     for i = 1 : length(exp)
         if(exp(i) == '(')
@@ -103,6 +103,24 @@ function [fValue, fError, fRelError] = final_cal_error(exp, input, error, isChop
     erre = [errd; cellstr(strerrE)];
     errors = [erre; cellstr(strerrF)];
     
-    [fValue, fError, fRelError] = chap1.cal_error(exp, values, errors, isChopping);
+    [fValueVal, fErrorVal, fRelErrorVal] = chap1.cal_error(exp, values, errors, isChopping);
+    
+    try
+        fValue = num2str(fValueVal);
+    catch
+        fValue = char(fValueVal);
+    end
+    
+    try
+        fError = num2str(fErrorVal);
+    catch
+        fError = char(fErrorVal);
+    end
+    
+    try
+        fRelError = num2str(fRelErrorVal);
+    catch
+        fRelError = char(fRelErrorVal);
+    end
     
 end

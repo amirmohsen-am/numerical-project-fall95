@@ -1,6 +1,6 @@
 function [value, error, relError] = cal_error(exp, input, error, isChopping)
     format long
-    syms A B C D E F eA eB eC eD eE eF
+    syms a b c d e f eA eB eC eD eE eF
     
     aStr = char(input(1));
     bStr = char(input(2));
@@ -23,44 +23,44 @@ function [value, error, relError] = cal_error(exp, input, error, isChopping)
     errE = chap1.calculate_absolute_error(eStr, errEStr, isChopping);
     errF = chap1.calculate_absolute_error(fStr, errFStr, isChopping);
     
-    a = str2double(aStr);
-    b = str2double(bStr);
-    c = str2double(cStr);
-    d = str2double(dStr);
-    e = str2double(eStr);
-    f = str2double(fStr);
+    A = str2double(aStr);
+    B = str2double(bStr);
+    C = str2double(cStr);
+    D = str2double(dStr);
+    E = str2double(eStr);
+    F = str2double(fStr);
     
     if (errA < 0)
-        a = A;
+        A = a;
         errA = eA;
     end
     
     if (errB < 0)
-        b = B;
+        B = b;
         errB = eB;
     end
     
     if (errC < 0)
-        c = C;
+        C = c;
         errC = eC;
     end
        
     if (errD < 0)
-        d = D;
+        D = d;
         errD = eD;
     end
     
     if (errE < 0)
-        e = E;
+        E = e;
         errE = eE;
     end
     
     if (errF < 0)
-        f = F;
+        F = f;
         errF = eF;
     end
     
-    values = [a;b;c;d;e;f];
+    values = [A;B;C;D;E;F];
     errors = [errA;errB;errC;errD;errE;errF];
     in = ['a';'b';'c';'d';'e';'f'];
     

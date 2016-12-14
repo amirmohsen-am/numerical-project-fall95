@@ -108,9 +108,9 @@ isChopping = handles.checkbox1.Value;
 
 syms a b c d e f
 printLatex2(strcat('Function: ', latex(eval(F))));
-printLatex2(strcat('Final Value = ', num2str(finalValue)));
-printLatex2(strcat('Absolute Error = ', num2str(absError)));
-printLatex2(strcat('Relative Error = ', num2str(relError)));
+printLatex2(strcat('Final Value = ', finalValue));
+printLatex2(strcat('Absolute Error = ', absError));
+printLatex2(strcat('Relative Error = ', relError));
 printLatex2('');
 
 
