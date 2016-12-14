@@ -4,6 +4,15 @@ function [ fittedFunc, rmserror ] = curveFitting9( number, xlar, y )
     
     syms x;
     
+    for i=1:number
+        if ( xlar(i)==0 )
+            fittedFunc = 1;
+            rmserror = -1;
+            return;
+        end
+    end
+    
+    
     X = vpa(cot(xlar), digits);
     Y = y;
     Sx0 = number;
