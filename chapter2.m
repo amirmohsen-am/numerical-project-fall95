@@ -123,6 +123,10 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 value = get(handles.listbox2, 'Value');
+if (value == 6 && ~all(~cellfun(@isempty, handles.uitable1.Data(:))))
+	errordlg('Input data is incomplete', 'Input error');
+	return;
+end
 
 axes(handles.axesPlot);
 global texty
