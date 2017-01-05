@@ -22,7 +22,7 @@ function varargout = main(varargin)
 
 % Edit the above text to modify the response to help main
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 23:02:04
+% Last Modified by GUIDE v2.5 05-Jan-2017 17:32:15
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -129,3 +129,32 @@ function edit1_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in buttonchapter4.
+function buttonchapter4_Callback(hObject, eventdata, handles)
+% hObject    handle to buttonchapter4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(handles.figure1);
+chapter4
+
+
+% --- Executes on button press in buttonchapter5.
+function buttonchapter5_Callback(hObject, eventdata, handles)
+% hObject    handle to buttonchapter5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(handles.figure1);
+chapter5
+
+% --- Executes on button press in buttonchapter6.
+function buttonchapter6_Callback(hObject, eventdata, handles)
+% hObject    handle to buttonchapter6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(handles.figure1);
+chapter6
