@@ -42,8 +42,8 @@ while(isempty(F(i:length(F))) == 0)
                                  end 
                             end
       
-                            values = [values; (firstOpValue + secondOpValue)];
-                            errors = [errors; (firstOpError + secondOpError)];
+                            values = [values; eval(vpa(firstOpValue + secondOpValue))];
+                            errors = [errors; (eval(vpa(firstOpError + secondOpError)))];
                             newName = strcat('op', num2str(length(inputNames)));
                             newNameCell = cellstr(newName);
                             inputNamesCell = cellstr(inputNames);
@@ -82,8 +82,8 @@ while(isempty(F(i:length(F))) == 0)
                                  end 
                             end
       
-                            values = [values; (firstOpValue - secondOpValue)];
-                            errors = [errors; (firstOpError + secondOpError)];
+                            values = [values; (eval(vpa(firstOpValue - secondOpValue)))];
+                            errors = [errors; (eval(vpa(firstOpError + secondOpError)))];
                             newName = strcat('op', num2str(length(inputNames)));
                             newNameCell = cellstr(newName);
                             inputNamesCell = cellstr(inputNames);
@@ -123,8 +123,8 @@ while(isempty(F(i:length(F))) == 0)
                                  end 
                             end
       
-                            values = [values; (firstOpValue * secondOpValue)];
-                            errors = [errors; (abs(firstOpError * secondOpValue) + abs(secondOpError * firstOpValue))];
+                            values = [values; (eval(vpa(firstOpValue * secondOpValue)))];
+                            errors = [errors; (eval(vpa(abs(firstOpError * secondOpValue) + abs(secondOpError * firstOpValue))))];
                             newName = strcat('op', num2str(length(inputNames)));
                             newNameCell = cellstr(newName);
                             inputNamesCell = cellstr(inputNames);
@@ -163,8 +163,8 @@ while(isempty(F(i:length(F))) == 0)
                                  end 
                             end
       
-                            values = [values; (firstOpValue / secondOpValue)];
-                            errors = [errors; ((abs(firstOpError * secondOpValue) + abs(secondOpError * firstOpValue)) / (secondOpValue ^ 2))];
+                            values = [values; (eval(vpa(firstOpValue / secondOpValue)))];
+                            errors = [errors; ((eval(vpa(abs(eval(vpa(firstOpError * secondOpValue))) + abs(eval(vpa(secondOpError * firstOpValue)))) / (eval(vpa(secondOpValue ^ 2))))))];
                             newName = strcat('op', num2str(length(inputNames)));
                             newNameCell = cellstr(newName);
                             inputNamesCell = cellstr(inputNames);
@@ -204,8 +204,8 @@ while(isempty(F(i:length(F))) == 0)
                                  end 
                             end
       
-                            values = [values; (firstOpValue ^ secondOpValue)];
-                            errors = [errors; (abs((firstOpError) * ((firstOpValue) ^ ((secondOpValue) - 1)) * secondOpValue))];
+                            values = [values; (eval(vpa(firstOpValue ^ secondOpValue)))];
+                            errors = [errors; (eval(vpa(abs((firstOpError) * ((firstOpValue) ^ ((secondOpValue) - 1)) * secondOpValue))))];
                             newName = strcat('op', num2str(length(inputNames)));
                             newNameCell = cellstr(newName);
                             inputNamesCell = cellstr(inputNames);
