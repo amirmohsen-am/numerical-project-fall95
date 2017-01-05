@@ -490,9 +490,9 @@ if (handles.buttonMethod.SelectedObject == handles.integration)
 		case 1 %Trapezodial
 			out = chap4.trapezoidal(F,a,b,h,@printLatex2);
 		case 2 %Simpson1/3
-			out = chap4.simpsons3(F,a,b,h);
+			out = chap4.simpsons3(F,a,b,h,@printLatex2);
 		case 3 %Simpson3/8
-			out = chap4.simpsons8(F,a,b,h);
+			out = chap4.simpsons8(F,a,b,h,@printLatex2);
 		case 4 %Romberg
 			out = chap4.romberg(F,a,b,h,@printLatex);
 		case 5 %Gauss Legandre
