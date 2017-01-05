@@ -17,7 +17,11 @@ function [ dominant, dominantVector, values, vectors ] = powerMethod( A, steps, 
         dominantVector = vectors(:, i);
         
         %printlatex
-        z = strcat('dominant eigenvalue: ', num2str(eval(dominant)), ' and coressponding eigenvector', mat2str(dominantVector));
+        z = sprintf('%s\n%s\n%s', 'dominant eigenvalue:', num2str(eval(dominant)), ' and coressponding eigenvector');
+        for i = 1:n
+            z = sprintf('%s\n%s',z, num2str(dominantVector(i)));
+        end
+        z
         printLatex(z);
 end
 

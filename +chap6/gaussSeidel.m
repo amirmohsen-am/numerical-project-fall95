@@ -37,12 +37,9 @@ function [ X, answer, newA, newB, n, isSDD, singular ] = gaussSeidel( A, B, step
     newA = A;
     newB = B;
     
-    z = 'x1 = ';
-    z = strcat(z, num2str( X(1)) , ' ');
-    for i = 2:n
-        z = strcat(z,', x',num2str(i), ' = ', num2str( X(i)));
-    end
-    printLatex( z );
+        printOutput(X,n, printLatex);
+
+    
                         
 
 end

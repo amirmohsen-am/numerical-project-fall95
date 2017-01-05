@@ -73,12 +73,8 @@ function [ X, L, U, P, Y, PA, PB, singular] = luCrout( A,B, printLatex)
      PA = A;
      PB = B;
     
-    z = 'x1 = ';
-    z = strcat(z, num2str( X(1)) , ' ');
-    for i = 2:n
-        z = strcat(z,', x',num2str(i), ' = ', num2str( X(i)));
-    end
-    printLatex( z );
+        printOutput(X,n, printLatex);
+
      
 end
 

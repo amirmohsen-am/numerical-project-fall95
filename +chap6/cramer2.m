@@ -1,5 +1,6 @@
-function [ X, detA, Ai, detAi, n, singular ] = cramer( A, B, printLatex)
-
+function [ X ] = cramer2( A,B )
+    
+        
     n = size(B,1);
     X = zeros(n, 1);
     detA = vpa(  det(A)  );
@@ -23,12 +24,6 @@ function [ X, detA, Ai, detAi, n, singular ] = cramer( A, B, printLatex)
     for i = 1:n
        X(i) = vpa(  detAi(i)/ detA  ); 
     end
-    
-    
-    %printlatex
-    
-    printOutput(X,n, printLatex);
-    
-    
+
 end
 

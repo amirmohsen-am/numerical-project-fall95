@@ -14,9 +14,27 @@ function [ vectors, values] = eigen( A, printLatex)
         end
         deter = vpa(  det(newA)  );
         values = vpa(  solve(deter)  );
-                
+        
+       % distinctVal = unique(values);
+       % s = size(distinctVal,1)
+%         for i = 1:n
+           % for j = 1:n
+           %     newA(j,j) = A(j,j) - values(i);
+%            % end
+%            newA = A - values(i)*eye(n);
+%             newA
+%             m = vpa(  rref(newA)  ) 
+%             vectors(n,i) = 1;
+%             for j = n-1:-1:1
+%                 t = 0;
+%                 for k = j+1:n
+%                     t = vpa(  t - m(j,k) );
+%                 end
+%                 vectors(j,i) = t;
+%             end
+%         end
         B = zeros(n,1);
-%         
+%         t = zeros(n-1, n-1);
         for i = 1:n
             newA = A - values(i)*eye(n);
             for j = 1:n
@@ -44,16 +62,10 @@ function [ vectors, values] = eigen( A, printLatex)
     %printLatex
     z = '';
     for i = 1:n
-        z = sprintf('%s\n%s', z, num2str(eval(values(i))));
+        z = sprintf('%s\n%s', z, num2str(values(i)));
     end
     for i = 1:n
-        z = sprintf('%s\n%s%s', z, 'vector #',num2str(i));
-        for j = 1:n
-            z = sprintf('%s\n%s', z, num2str(vectors(i,j)));
-        end
-    end
-    vectors
-    z
+        z = sprintf('%s\n%s', z, 'vector number'
     printLatex(z)
                 
             
