@@ -184,6 +184,15 @@ function listbox3_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox3 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox3
 
+value = hObject.Value;
+
+if value == 4 || value == 5
+	handles.text17.String = 'n:';
+else
+	handles.text17.String = 'h:';
+end
+
+
 
 % --- Executes during object creation, after setting all properties.
 function listbox3_CreateFcn(hObject, eventdata, handles)
