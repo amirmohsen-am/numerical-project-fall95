@@ -19,8 +19,8 @@ function answers = DE2ndOrder(f, initial, h)
     u = yprimei;
     
     
-    ans2 = h * eval(U) + yi;
-    ans1 = h * eval(V) +  yprimei;
+    ans2 = eval(vpa(h * eval(U) + yi));
+    ans1 = eval(vpa(h * eval(V) +  yprimei));
     
     answers = [ans1; ans2];
 end

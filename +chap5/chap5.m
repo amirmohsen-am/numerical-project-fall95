@@ -12,12 +12,12 @@
     8 -> 2nd order D.E By Euler method 
     9 -> Runge_Kutta 4th-Order
 %}
-function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylor, steps for number of times it should apply the method
+function answerFinal = chap5(F, initial, h, n, steps, y, method) %n for taylor, steps for number of times it should apply the method
     if(method == 0) % Taylor
         if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / h;
         end
-        answers = taylorMethod(F, initial, h, n);
+        answers = chap5.taylorMethod(F, initial, h, n);
         
         initial = [initial(1)+ h answers];
         
@@ -25,7 +25,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         newNameCell = cellstr(newName);
         answerFinal = newNameCell;
         for i = 2 : steps
-            answers = [answers; taylorMethod(F, initial, h, n)];
+            answers = [answers; chap5.taylorMethod(F, initial, h, n)];
             initial = [initial(1) + h answers(length(answers))];
             
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -39,7 +39,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / h;
         end
-         answers = euler(F, initial, h);
+         answers = chap5.euler(F, initial, h);
         initial = [initial(1)+ h answers];
         
         newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -47,7 +47,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         answerFinal = newNameCell;
         
         for i = 2 : steps
-            answers = [answers; euler(F, initial, h)];
+            answers = [answers; chap5.euler(F, initial, h)];
             initial = [initial(1) + h answers(length(answers))];
         
             
@@ -61,7 +61,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / h;
         end
-         answers = modifiedEuler(F, initial, h);
+         answers = chap5.modifiedEuler(F, initial, h);
         initial = [initial(1)+ h answers];
         
         newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -70,7 +70,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         
         
         for i = 2 : steps
-            answers = [answers; modifiedEuler(F, initial, h)];
+            answers = [answers; chap5.modifiedEuler(F, initial, h)];
             initial = [initial(1) + h answers(length(answers))];
             
             
@@ -84,7 +84,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / h;
         end 
-        answers = rungeKutta_Midpoint(F, initial, h);
+        answers = chap5.rungeKutta_Midpoint(F, initial, h);
         initial = [initial(1)+ h answers];
         
         newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -92,7 +92,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         answerFinal = newNameCell;
         
         for i = 2 : steps
-            answers = [answers; rungeKutta_Midpoint(F, initial, h)];
+            answers = [answers; chap5.rungeKutta_Midpoint(F, initial, h)];
             initial = [initial(1) + h answers(length(answers))];
             
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -105,7 +105,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
        if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / h;
          end
-        answers = rungeKutta_3rdOrder(F, initial, h);
+        answers = chap5.rungeKutta_3rdOrder(F, initial, h);
         initial = [initial(1)+ h answers];
         
         newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -113,7 +113,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         answerFinal = newNameCell;
         
         for i = 2 : steps
-            answers = [answers; rungeKutta_3rdOrder(F, initial, h)];
+            answers = [answers; chap5.rungeKutta_3rdOrder(F, initial, h)];
             initial = [initial(1) + h answers(length(answers))];
             
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -126,7 +126,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / h;
         end
-        answers = rungeKutta_4thOrder(F, initial, h);
+        answers = chap5.rungeKutta_4thOrder(F, initial, h);
         initial = [initial(1)+ h answers];
         
         newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -134,7 +134,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         answerFinal = newNameCell;
         
         for i = 2 : steps
-            answers = [answers; rungeKutta_4thOrder(F, initial, h)];
+            answers = [answers; chap5.rungeKutta_4thOrder(F, initial, h)];
             initial = [initial(1) + h answers(length(answers))];
             
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -147,7 +147,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / (3 * h);
         end
-        answers = adamsMulton_3rdOrder(F, initial, h);
+        answers = chap5.adamsMulton_3rdOrder(F, initial, h);
         initial = [initial(1)+ 3 * h answers];
         
         newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -155,7 +155,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         answerFinal = newNameCell;
         
         for i = 2 : steps
-            answers = [answers; adamsMulton_3rdOrder(F, initial, h)];
+            answers = [answers; chap5.adamsMulton_3rdOrder(F, initial, h)];
             initial = [initial(1) + 3 * h answers(length(answers))];
             
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -168,7 +168,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         if(isnan(y) == 0) %y is perfered over steps 
             steps = (y - initial(1)) / (4 * h);
         end
-         answers = adamsMulton_4thOrder(F, initial, h);
+         answers = chap5.adamsMulton_4thOrder(F, initial, h);
         initial = [initial(1) + 4*h answers];
         
         newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -176,7 +176,7 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
         answerFinal = newNameCell;
         
         for i = 2 : steps
-            answers = [answers; adamsMulton_4thOrder(F, initial, h)];
+            answers = [answers; chap5.adamsMulton_4thOrder(F, initial, h)];
             initial = [initial(1) + 4*h answers(length(answers))];
             
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)));
@@ -192,14 +192,14 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
             steps = (y - initial(1)) / (h);
          end
          
-        answers = DE2ndOrder(F, initial, h);
+        answers = chap5.DE2ndOrder(F, initial, h);
         newName = strcat('y(',  num2str(initial(1) + h), ') =  ', num2str(answers( 2)), ' , y''(',  num2str(initial(1) + h), ') =  ', num2str(answers(1)));
         newNameCell = cellstr(newName);
         answerFinal = newNameCell;
         
         initial = [initial(1)+ h answers(2) answers(1)];
         for i = 2 : steps
-            answers = [answers; DE2ndOrder(F, initial, h)];
+            answers = [answers; chap5.DE2ndOrder(F, initial, h)];
             initial = [initial(1) + h answers(length(answers)) answers(length(answers) - 1)];
        
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)), ' , y''(',  num2str(initial(1)), ') =  ', num2str(initial(3)));
@@ -212,14 +212,14 @@ function answerFinal = chapter5(F, initial, h, n, steps, y, method) %n for taylo
             steps = (y - initial(1)) / (h);
          end
          
-        answers = DE2ndOrderRunge_Kutta(F, initial, h);
+        answers = chap5.DE2ndOrderRunge_Kutta(F, initial, h);
         newName = strcat('y(',  num2str(initial(1) + h), ') =  ', num2str(answers( 2)), ' , y''(',  num2str(initial(1) + h), ') =  ', num2str(answers(1)));
         newNameCell = cellstr(newName);
         answerFinal = newNameCell;
         
         initial = [initial(1)+ h answers(2) answers(1)];
         for i = 2 : steps
-            answers = [answers; DE2ndOrderRunge_Kutta(F, initial, h)];
+            answers = [answers; chap5.DE2ndOrderRunge_Kutta(F, initial, h)];
             initial = [initial(1) + h answers(length(answers)) answers(length(answers) - 1)];
        
             newName = strcat('y(',  num2str(initial(1)), ') =  ', num2str(initial(2)), ' , y''(',  num2str(initial(1)), ') =  ', num2str(initial(3)));
