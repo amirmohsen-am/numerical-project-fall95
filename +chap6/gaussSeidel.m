@@ -4,7 +4,7 @@ function [ X, answer, newA, newB, n, isSDD ] = gaussSeidel( A, B, steps, initial
     answer = zeros(n, steps+1);
     answer(:, 1) = initial;
     
-    isSDD = checkSDD(A); %% if isDD is 1, then the matrix is strictly diagonally dominant, otherwise it's not
+    isSDD = chap6.checkSDD(A); %% if isDD is 1, then the matrix is strictly diagonally dominant, otherwise it's not
     
     
     if isSDD == 0

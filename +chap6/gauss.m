@@ -18,7 +18,7 @@ function [ X, reduced, n] = gauss( A, B )
 %           end
 %       end         
 %    end
-    P = pivot(Aug);
+    P = chap6.pivot(Aug);
     Aug = P*Aug;
     reduced(:,:,1) = Aug;
     

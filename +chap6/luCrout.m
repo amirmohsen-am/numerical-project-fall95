@@ -25,7 +25,7 @@ function [ X, L, U, P, Y, PA, PB] = luCrout( A,B)
  %      end         
  %    end
  
-    P = pivot(A);
+    P = chap6.pivot(A);
      A = P*A;
      
      for i = 1: n   %%calc L and U
