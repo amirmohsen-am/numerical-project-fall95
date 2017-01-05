@@ -31,7 +31,7 @@ function [ vectors, values] = eigen( A, printLatex)
                 end
             end
             B = setdiff(B, B(j));
-            
+          
             vectors(:,i) = [1;chap6.cramer2(newMat,B)];
         end
 
@@ -44,16 +44,13 @@ function [ vectors, values] = eigen( A, printLatex)
     %printLatex
     z = '';
     for i = 1:n
-        z = sprintf('%s\n%s', z, num2str(eval(values(i))));
-    end
-    for i = 1:n
-        z = sprintf('%s\n%s%s', z, 'vector #',num2str(i));
+        z = sprintf('%s\n%s%s', z, 'value #', num2str(i));
+        z = sprintf('%s\n%s', z ,num2str(eval(values(i))));
+        z = sprintf('%s\n%s%s', z, 'corresponding vector ');
         for j = 1:n
-            z = sprintf('%s\n%s', z, num2str(vectors(i,j)));
+            z = sprintf('%s\n%s', z, num2str(vectors(j,i)));
         end
     end
-    vectors
-    z
     printLatex(z)
                 
             

@@ -50,7 +50,7 @@ function [ X, reduced, n, singular] = gauss( A, B, printLatex )
     
     %print latex
     
-        printOutput(X,n, printLatex);
+        chap6.printOutput(X,n, printLatex);
 
     
 end

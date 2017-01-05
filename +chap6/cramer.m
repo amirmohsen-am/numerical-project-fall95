@@ -27,7 +27,7 @@ function [ X, detA, Ai, detAi, n, singular ] = cramer( A, B, printLatex)
     
     %printlatex
     
-    printOutput(X,n, printLatex);
+    chap6.printOutput(X,n, printLatex);
     
     
 end

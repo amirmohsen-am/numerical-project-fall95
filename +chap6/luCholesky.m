@@ -55,7 +55,7 @@ function [ X, L, U, Atranspose, Y, newA, newB, n, singular ] = luCholesky( A, B,
     
     %print latex
     
-        printOutput(X,n, printLatex);
+        chap6.printOutput(X,n, printLatex);
 
     
 end

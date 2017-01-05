@@ -73,7 +73,7 @@ function [ X, L, U, P, Y, PA, PB, singular] = luCrout( A,B, printLatex)
      PA = A;
      PB = B;
     
-        printOutput(X,n, printLatex);
+        chap6.printOutput(X,n, printLatex);
 
      
 end

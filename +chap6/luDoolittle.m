@@ -79,7 +79,7 @@ function [ X, L, U, P, Y, PA, PB, n, singular ] = luDoolittle( A, B, printLatex 
     
     %print latex
     
-        printOutput(X,n, printLatex);
+        chap6.printOutput(X,n, printLatex);
 
 
 end

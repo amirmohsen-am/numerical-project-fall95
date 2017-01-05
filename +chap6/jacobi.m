@@ -35,7 +35,7 @@ function [ X, answer, newA, newB, n, isSDD, singular ] = jacobi( A, B, steps, in
     newA = A;
     newB = B;
     
-        printOutput(X,n, printLatex);
+        chap6.printOutput(X,n, printLatex);
 
     
     

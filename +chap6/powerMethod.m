@@ -21,7 +21,7 @@ function [ dominant, dominantVector, values, vectors ] = powerMethod( A, steps, 
         for i = 1:n
             z = sprintf('%s\n%s',z, num2str(dominantVector(i)));
         end
-        z
+        
         printLatex(z);
 end
 
