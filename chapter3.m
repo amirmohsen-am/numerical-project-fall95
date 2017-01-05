@@ -22,7 +22,7 @@ function varargout = chapter3(varargin)
 
 % Edit the above text to modify the response to help chapter3
 
-% Last Modified by GUIDE v2.5 15-Dec-2016 02:13:57
+% Last Modified by GUIDE v2.5 05-Jan-2017 15:35:55
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -42,6 +42,8 @@ else
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
+movegui(gcf,'center');
+
 
 
 % --- Executes just before chapter3 is made visible.
@@ -603,3 +605,13 @@ if (hObject == handles.curve2)
 else
 	handles.popupmenu4.Visible = 'off';	
 end
+
+
+% --- Executes on button press in homebutton.
+function homebutton_Callback(hObject, eventdata, handles)
+% hObject    handle to homebutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(handles.figure1);
+main

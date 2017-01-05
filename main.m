@@ -43,7 +43,6 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-
 % --- Executes just before main is made visible.
 function main_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
@@ -64,6 +63,7 @@ guidata(hObject, handles);
 % myInit
 global precision
 precision = str2num(handles.edit1.String);
+movegui(gcf,'center');
 
 
 % --- Outputs from this function are returned to the command line.
@@ -82,6 +82,7 @@ function buttonchapter1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+close(handles.figure1);
 chapter1
 
 % --- Executes on button press in buttonchapter2.
@@ -90,6 +91,7 @@ function buttonchapter2_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+close(handles.figure1);
 chapter2
 
 
@@ -100,6 +102,7 @@ function buttonchapter3_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+close(handles.figure1);
 chapter3
 
 

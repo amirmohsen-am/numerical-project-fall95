@@ -22,7 +22,7 @@ function varargout = chapter1(varargin)
 
 % Edit the above text to modify the response to help chapter1
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 21:52:21
+% Last Modified by GUIDE v2.5 05-Jan-2017 15:40:45
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -42,7 +42,7 @@ else
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
-
+movegui(gcf,'center');
 
 % --- Executes just before chapter1 is made visible.
 function chapter1_OpeningFcn(hObject, eventdata, handles, varargin)
@@ -251,3 +251,13 @@ function uitable1_CellEditCallback(hObject, eventdata, handles)
 %	NewData: EditData or its converted form set on the Data property. Empty if Data was not changed
 %	Error: error string when failed to convert EditData to appropriate value for Data
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in homebutton.
+function homebutton_Callback(hObject, eventdata, handles)
+% hObject    handle to homebutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(handles.figure1);
+main

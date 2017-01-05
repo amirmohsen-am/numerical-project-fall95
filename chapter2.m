@@ -22,7 +22,7 @@ function varargout = chapter2(varargin)
 
 % Edit the above text to modify the response to help chapter2
 
-% Last Modified by GUIDE v2.5 07-Dec-2016 13:49:07
+% Last Modified by GUIDE v2.5 05-Jan-2017 15:41:09
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -42,6 +42,7 @@ else
     gui_mainfcn(gui_State, varargin{:});
 end
 % End initialization code - DO NOT EDIT
+movegui(gcf,'center');
 
 
 % --- Executes just before chapter2 is made visible.
@@ -68,7 +69,6 @@ axes(handles.axesLog);
 ylim([-1, 0]);
 
 setTable(handles);
-
 
 % --- Outputs from this function are returned to the command line.
 function varargout = chapter2_OutputFcn(hObject, eventdata, handles) 
@@ -423,3 +423,13 @@ function figure1_DeleteFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 %error('Pogram close');
+
+
+% --- Executes on button press in homebutton.
+function homebutton_Callback(hObject, eventdata, handles)
+% hObject    handle to homebutton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+close(handles.figure1);
+main
