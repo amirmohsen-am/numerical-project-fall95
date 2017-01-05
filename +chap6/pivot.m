@@ -1,11 +1,12 @@
-function [ P ] = pivot( A )
+function [ P ] = pivot( A ) 
     
     n = size(A, 1);
     P = eye(n);
     
     for i = 1: n-1
        
-        [t, j] = max(abs(A(i:n, i)));
+        [t, j] = max(abs(A(:, i)));
+        
         temp = A(i, :);
         A(i, :) = A(j, :);
         A(j, :) = temp;
