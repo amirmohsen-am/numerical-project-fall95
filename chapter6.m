@@ -74,8 +74,8 @@ handles.editN.String = '3';
 rname = cell(1, n);
 cname = cell(1, n+1);
 for i = 1:n
-	rname{i} = sprintf('eq#%d', num2str(i));
-	cname{i} = sprintf('a%d', num2str(i));
+	rname{i} = sprintf('eq#%d', i);
+	cname{i} = sprintf('a%d', i);
 end
 cname{n+1} = 'c';
 t = handles.uitable1;
@@ -201,6 +201,14 @@ function listbox3_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox3 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox3
 
+value = hObject.Value;
+if value == 6 || value == 7
+	handles.uipanel9.Visible = 'on';
+else
+	handles.uipanel9.Visible = 'off';
+end
+
+
 
 % --- Executes during object creation, after setting all properties.
 function listbox3_CreateFcn(hObject, eventdata, handles)
@@ -247,6 +255,33 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+if (handles.buttonMethod.SelectedObject == handles.part1)
+	steps = str2num(handles.editSteps.String);
+	guess = str2num(handles.editGuess.String);
+	value = handles.listbox3.Value;
+	switch value
+		case 1 %Cramer
+			;
+		case 2 %Gausse Elimination
+			;
+		case 3 %LU Doolittle
+			;
+		case 4 %LU Cholesky
+			;
+		case 5 %LU Crout
+			;
+		case 6 %Jacobi
+			;
+		case 7 %Gauss Seidel
+			;
+		;
+	end
+else
+	mat = str2mat(handles.editInput.String);
+	;
+end
+
+
 
 function editN_Callback(hObject, eventdata, handles)
 % hObject    handle to editN (see GCBO)
@@ -261,8 +296,8 @@ n = str2num(S);
 rname = cell(1, n);
 cname = cell(1, n+1);
 for i = 1:n
-	rname{i} = sprintf('eq#%d', num2str(i));
-	cname{i} = sprintf('a%d', num2str(i));
+	rname{i} = sprintf('eq#%d', i);
+	cname{i} = sprintf('a%d', i);
 end
 cname{n+1} = 'c';
 if ~all(ismember(S, '.1234567890'))
