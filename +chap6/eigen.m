@@ -42,16 +42,19 @@ function [ vectors, values] = eigen( A, printLatex)
        
 
     %printLatex
-    z = '';
+    
     for i = 1:n
-        z = sprintf('%s\n%s%s', z, 'value #', num2str(i));
-        z = sprintf('%s\n%s', z ,num2str(eval(values(i))));
-        z = sprintf('%s\n%s%s', z, 'corresponding vector ');
+        z = sprintf('%s%s', 'Value :', num2str(i));
+        printLatex(z);
+        z = num2str(eval(values(i)));
+        printLatex(z);
+        z = 'Corresponding Vector :';
+        printLatex(z);
         for j = 1:n
-            z = sprintf('%s\n%s', z, num2str(vectors(j,i)));
+            z = num2str(vectors(j,i));
+            printLatex(z);
         end
     end
-    printLatex(z)
                 
             
             
