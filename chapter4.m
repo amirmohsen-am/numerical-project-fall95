@@ -115,7 +115,7 @@ function printLatex(str)
     global globalHandles
     axes(globalHandles.axesLog);
 	global texty
-	step = 0.2;
+	step = 0.05;
 	text(0.05, texty-step/2, str, 'Interpreter', 'latex');
 	texty = texty-step;
     axes(globalHandles.axesPlot);

@@ -22,7 +22,7 @@ function varargout = chapter5(varargin)
 
 % Edit the above text to modify the response to help chapter5
 
-% Last Modified by GUIDE v2.5 05-Jan-2017 23:05:47
+% Last Modified by GUIDE v2.5 06-Jan-2017 01:37:57
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -253,13 +253,17 @@ F = handles.editFunction.String;
 h = str2num(handles.editH.String);
 n = str2num(handles.editN.String);
 steps = str2num(handles.editSteps.String);
-y = str2num(handles.editSteps.String);
+y = str2num(handles.editY.String);
 x0 = str2num(handles.editX0.String);
 y0 = str2num(handles.editY0.String);
 yp0 = str2num(handles.editYp0.String);
 initial = [x0 y0 yp0];
 
-steps = NaN;
+if handles.YorStep.SelectedObject == handles.radioY
+	steps = NaN;
+else
+	y = NaN;
+end
 
 out = chap5.chap5(F, initial, h, n, steps, y, method);
 printLatex2(out);
@@ -463,4 +467,19 @@ function listbox4_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes when selected object is changed in YorStep.
+function YorStep_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in YorStep 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+if hObject == handles.radioY
+	handles.editY.Enable = 'on';
+	handles.editSteps.Enable = 'off';
+else
+	handles.editY.Enable = 'off';
+	handles.editSteps.Enable = 'on';
 end
