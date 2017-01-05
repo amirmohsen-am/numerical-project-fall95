@@ -1,9 +1,16 @@
-function [ X, L, U, Atranspose, Y, newA, newB, n ] = luCholesky( A, B)
+function [ X, L, U, Atranspose, Y, newA, newB, n, singular ] = luCholesky( A, B, printLatex)
     
     n = size(B, 1);
     X = zeros(n, 1);
     L = zeros(n);
     Y = zeros(n, 1);
+    
+     singular = 0;
+    if (  abs(det(A)) < 1e-8   )
+        singular = 1;
+        return;
+    end
+    
     Atranspose = transpose(A);
     A = Atranspose * A;
     B = Atranspose * B;
@@ -45,6 +52,15 @@ function [ X, L, U, Atranspose, Y, newA, newB, n ] = luCholesky( A, B)
     
     newA = A;
     newB = B;
+    
+    %print latex
+    
+    z = 'x1 = ';
+    z = strcat(z, num2str( X(1)) , ' ');
+    for i = 2:n
+        z = strcat(z,', x',num2str(i), ' = ', num2str( X(i)));
+    end
+    printLatex( z );
     
 end
 

@@ -1,10 +1,15 @@
-function [ X, reduced, n] = gauss( A, B )
+function [ X, reduced, n, singular] = gauss( A, B, printLatex )
 
     n = size(B, 1);
     X = zeros(n,1);
     Aug = [A B];
     reduced = zeros(n, n+1, n);
     
+     singular = 0;
+    if (  abs(det(A)) < 1e-8   )
+        singular = 1;
+        return;
+    end
     
 %    for i = 1:n %% after this no entry on main diagonal is zero
 %       if Aug(i,i)==0 
@@ -41,5 +46,15 @@ function [ X, reduced, n] = gauss( A, B )
         end
         X(i) = vpa(  (Aug(i, n+1) - t)/Aug(i,i)  );
     end
+    
+    
+    %print latex
+    
+    z = 'x1 = ';
+    z = strcat(z, num2str( X(1)) , ' ');
+    for i = 2:n
+        z = strcat(z,', x',num2str(i), ' = ', num2str( X(i)));
+    end
+    printLatex( z );
 end
 
