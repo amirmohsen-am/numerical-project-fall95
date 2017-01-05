@@ -22,7 +22,7 @@ function varargout = chapter6(varargin)
 
 % Edit the above text to modify the response to help chapter6
 
-% Last Modified by GUIDE v2.5 05-Jan-2017 19:36:48
+% Last Modified by GUIDE v2.5 05-Jan-2017 21:28:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -278,6 +278,8 @@ if (handles.buttonMethod.SelectedObject == handles.part1)
 	end
 else
 	mat = str2mat(handles.editInput.String);
+	powermethod = handles.powermethod.Value;
+	
 	;
 end
 
@@ -391,3 +393,12 @@ function editGuess_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in powermethod.
+function powermethod_Callback(hObject, eventdata, handles)
+% hObject    handle to powermethod (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of powermethod
