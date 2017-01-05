@@ -257,7 +257,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 if (handles.buttonMethod.SelectedObject == handles.part1)
 	steps = str2num(handles.editSteps.String);
-	initial = str2num(handles.editGuess.String);
+	initial = eval(handles.editGuess.String);
 	
 	data = handles.uitable1.Data;
 	n = length(data)-1;
@@ -291,7 +291,7 @@ else
 		chap6.eigen(mat, @printLatex);
 	else
 		steps = str2num(handles.editSteps2.String);
-		initial = str2num(handles.editGuess2.String);
+		initial = eval(handles.editGuess2.String);
 		
 		chap6.powerMethod(mat, steps, initial, @printLatex);
 	end
