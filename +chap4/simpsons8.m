@@ -1,7 +1,7 @@
 function out = simpsons8(f, a, b, h)
-    n = (b-a)/h;
+    n = round((b-a)/h);
     if mod(n,3)~=0
-        out='n must be multiple of 3 for simpson 3/8';
+        out='N must be multiple of 3 for simpson 3/8';
         return
     end
     m=[1 repmat([3 3 2],1,n/3)];

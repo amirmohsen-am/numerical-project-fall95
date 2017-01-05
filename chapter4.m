@@ -444,26 +444,27 @@ precision=5;
 digits(precision);
 
 F = handles.editFunction.String;
-axes(handles.axesPlot)
-cla
-hold on;
-plot([a-10, b+10], [0, 0], 'r--');
-fplot(F,[a b],'b')
-yl = ylim;
-xl = xlim;
-yrange =yl(2)-yl(1);
-xrange =xl(2)-xl(1);
-yl(1) = yl(1)-yrange/4;
-yl(2) = yl(2)+yrange/4;
-xl(1) = xl(1)-xrange/4;
-xl(2) = xl(2)+xrange/4;
-xlim(xl);
-ylim(yl);
 if (handles.buttonMethod.SelectedObject == handles.integration)
 	a = str2num(handles.editInt1.String);
 	b = str2num(handles.editInt2.String);
 	h = str2num(handles.editH1.String);
-
+    
+    axes(handles.axesPlot)
+    cla
+    hold on;
+    plot([a-10, b+10], [0, 0], 'r--');
+    fplot(F,[a b],'b')
+    yl = ylim;
+    xl = xlim;
+    yrange =yl(2)-yl(1);
+    xrange =xl(2)-xl(1);
+    yl(1) = yl(1)-yrange/4;
+    yl(2) = yl(2)+yrange/4;
+    xl(1) = xl(1)-xrange/4;
+    xl(2) = xl(2)+xrange/4;
+    xlim(xl);
+    ylim(yl);
+    
 	value = handles.listbox3.Value;
 	switch value
 		case 1 %Trapezodial
@@ -477,30 +478,71 @@ if (handles.buttonMethod.SelectedObject == handles.integration)
 		case 5 %Gauss Legandre
 			out = chap4.gauss(F,a,b,h);
 		case 6 %Customized Simpson
-			a=1;
+			n = (b-a)/h;
+            if mod(n,2)==0
+                printLatex('N is even, using Simpson $\frac{1}{3}$');
+                out = chap4.simpsons3(F,a,b,h);
+            else
+                printLatex('N is odd using:');
+                printLatex(sprintf('Simpson $\\frac{1}{3}$ for [%.4f, %.4f]',a,b-h*3));
+                printLatex(sprintf('Simpson $\\frac{3}{8}$ for [%.4f, %.4f]',b-h*3,b));
+                out = chap4.simpsons3(F,a,b-h*3,h);
+                out
+                out2 = chap4.simpsons8(F,b-h*3,b,h);
+                out2
+                out = out+out2;
+            end
     end
     if ischar(out)
-        'print the error'
+        errordlg(out, 'Input error');
     else
+        out
         printLatex(sprintf(sprintf('Final answer = $%%.%df$',precision), out))
     end
 else
+    
 	x = str2num(handles.editX.String);
+    
+    axes(handles.axesPlot)
+    cla
+    hold on;
+    plot([x-100, x+100], [0, 0], 'r--');
+    fplot(F,[x-1 x+1],'b')
+    yl = ylim;
+    xl = xlim;
+    yrange =yl(2)-yl(1);
+    xrange =xl(2)-xl(1);
+    yl(1) = yl(1)-yrange/4;
+    yl(2) = yl(2)+yrange/4;
+    xl(1) = xl(1)-xrange/4;
+    xl(2) = xl(2)+xrange/4;
+    xlim(xl);
+    ylim(yl);
+    
 	degree = str2num(handles.editDegree.String);
 	h = str2num(handles.editH2.String);
 	richardson = handles.richardson.Value;
-	error = str2num(handles.editError.String);
+	p = str2num(handles.editError.String);
 	
 	value = handles.curveMethod.SelectedObject; %Formula Method
-	
 	switch value
-		case handles.formula1 %O(h^2)
-			chap4.diff(F,x,degree,2,h);
-		case handles.formula2 %O(h^4)
-			chap4.diff(F,x,degree,4,h);
+        case handles.formula1 %O(h^2)
+            order = 2;
+        case handles.formula2 %O(h^4)
+            order = 4;
     end
     if richardson
-        %do something
+        printLatex('$$h_2 = \frac{h_1}{2}$$');
+        printLatex('$$G=\frac{2^pg(\frac{h_1}{2})-g(h_1)}{2^p-1}$$');
+        out = chap4.diff(F,x,degree,order,h,@printLatex2);
+        out2 = chap4.diff(F,x,degree,order,h/2,@printLatex2);
+        printLatex(sprintf(sprintf('$$g(h_1) = %%.%df$$',precision), out));
+        printLatex(sprintf(sprintf('$$g(h_2) = %%.%df$$',precision), out2));
+        G = (2^p*out2-out)/(2^p-1);
+        printLatex(sprintf(sprintf('$$G = %%.%df$$',precision), G));
+    else
+        out = chap4.diff(F,x,degree,order,h);
+        printLatex(sprintf(sprintf('Final answer $= %%.%df$',precision), out));
     end
 end
 
