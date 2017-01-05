@@ -452,6 +452,15 @@ global precision
 precision=5;
 digits(precision);
 
+%clear stuff
+axes(handles.axesPlot);
+global texty
+texty = 0;
+cla
+
+axes(handles.axesLog);
+cla
+
 F = handles.editFunction.String;
 if (handles.buttonMethod.SelectedObject == handles.integration)
 	a = str2num(handles.editInt1.String);
@@ -483,9 +492,9 @@ if (handles.buttonMethod.SelectedObject == handles.integration)
 		case 3 %Simpson3/8
 			out = chap4.simpsons8(F,a,b,h);
 		case 4 %Romberg
-			out = chap4.romberg(F,a,b,h);
+			out = chap4.romberg(F,a,b,h,@printLatex);
 		case 5 %Gauss Legandre
-			out = chap4.gauss(F,a,b,h);
+			out = chap4.gauss(F,a,b,h, @printLatex);
 		case 6 %Customized Simpson
 			n = (b-a)/h;
             if mod(n,2)==0
@@ -496,16 +505,13 @@ if (handles.buttonMethod.SelectedObject == handles.integration)
                 printLatex(sprintf('Simpson $\\frac{1}{3}$ for [%.4f, %.4f]',a,b-h*3));
                 printLatex(sprintf('Simpson $\\frac{3}{8}$ for [%.4f, %.4f]',b-h*3,b));
                 out = chap4.simpsons3(F,a,b-h*3,h);
-                out
                 out2 = chap4.simpsons8(F,b-h*3,b,h);
-                out2
                 out = out+out2;
             end
     end
     if ischar(out)
         errordlg(out, 'Input error');
     else
-        out
         printLatex(sprintf(sprintf('Final answer = $%%.%df$',precision), out))
     end
 else
@@ -544,13 +550,13 @@ else
         printLatex('$$h_2 = \frac{h_1}{2}$$');
         printLatex('$$G=\frac{2^pg(\frac{h_1}{2})-g(h_1)}{2^p-1}$$');
         out = chap4.diff(F,x,degree,order,h,@printLatex2);
-        out2 = chap4.diff(F,x,degree,order,h/2,@printLatex2);
         printLatex(sprintf(sprintf('$$g(h_1) = %%.%df$$',precision), out));
+        out2 = chap4.diff(F,x,degree,order,h/2,@printLatex2);
         printLatex(sprintf(sprintf('$$g(h_2) = %%.%df$$',precision), out2));
         G = (2^p*out2-out)/(2^p-1);
         printLatex(sprintf(sprintf('$$G = %%.%df$$',precision), G));
     else
-        out = chap4.diff(F,x,degree,order,h);
+        out = chap4.diff(F,x,degree,order,h,@printLatex2);
         printLatex(sprintf(sprintf('Final answer $= %%.%df$',precision), out));
     end
 end
