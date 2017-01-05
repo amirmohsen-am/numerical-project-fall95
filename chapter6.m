@@ -69,8 +69,8 @@ globalHandles=handles;
 axes(handles.axesLog);
 ylim([-1, 0]);
 
-n = 3;
-handles.editN.String = '3';
+n = 4;
+handles.editN.String = num2str(n);
 rname = cell(1, n);
 cname = cell(1, n+1);
 for i = 1:n
@@ -80,7 +80,7 @@ end
 cname{n+1} = 'c';
 t = handles.uitable1;
 t.ColumnWidth = num2cell(ones(1, n+1)*30);
-t.Data = zeros(n, n+1);
+t.Data = [1 -2 2 1 12; 0 0 -3 -2 5; 2 -1 3 4 10; 5 1 2 0 3];
 t.RowName = rname;
 t.ColumnName = cname;
 t.ColumnEditable = true;
@@ -132,7 +132,7 @@ function printLatex(str)
 	laxes = gca;
     axes(globalHandles.axesLog);
 	global texty
-	step = 0.2;
+	step = 0.05;
 	text(0.05, texty-step/2, str, 'Interpreter', 'latex');
 	texty = texty-step;
     axes(laxes);
@@ -283,7 +283,8 @@ if (handles.buttonMethod.SelectedObject == handles.part1)
 			chap6.gaussSeidel(A, B, steps, initial, @printLatex);
 	end
 else
-	mat = str2mat(handles.editInput.String);
+	str = strjoin(handles.editInput.String);
+	mat = eval(str);
 	powermethod = handles.powermethod.Value;
 	
 	if powermethod == 0
