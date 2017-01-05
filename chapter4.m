@@ -451,7 +451,6 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global precision
-precision=5;
 digits(precision);
 
 %clear stuff
