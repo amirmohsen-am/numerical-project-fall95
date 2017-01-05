@@ -1,5 +1,4 @@
 function out = romberg(f, a, b, n)
-   format long
    function out = trapezoid(h)
         out = sum(eval(subs(f,a:h:b)));
         out = out - sum(eval(subs(f,[a b])))/2;

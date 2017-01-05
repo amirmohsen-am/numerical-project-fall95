@@ -439,43 +439,69 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global precision
+precision=5;
+digits(precision);
 
-
+F = handles.editFunction.String;
+axes(handles.axesPlot)
+cla
+hold on;
+plot([a-10, b+10], [0, 0], 'r--');
+fplot(F,[a b],'b')
+yl = ylim;
+xl = xlim;
+yrange =yl(2)-yl(1);
+xrange =xl(2)-xl(1);
+yl(1) = yl(1)-yrange/4;
+yl(2) = yl(2)+yrange/4;
+xl(1) = xl(1)-xrange/4;
+xl(2) = xl(2)+xrange/4;
+xlim(xl);
+ylim(yl);
 if (handles.buttonMethod.SelectedObject == handles.integration)
-	interval1 = handles.editInt1.String;
-	interval2 = handles.editInt2.String;
-	h = handles.editH1.String;
-	
+	a = str2num(handles.editInt1.String);
+	b = str2num(handles.editInt2.String);
+	h = str2num(handles.editH1.String);
+
 	value = handles.listbox3.Value;
 	switch value
 		case 1 %Trapezodial
-			;
+			out = chap4.trapezoidal(F,a,b,h,@printLatex2);
 		case 2 %Simpson1/3
-			;
+			out = chap4.simpsons3(F,a,b,h);
 		case 3 %Simpson3/8
-			;
+			out = chap4.simpsons8(F,a,b,h);
 		case 4 %Romberg
-			;
+			out = chap4.romberg(F,a,b,h);
 		case 5 %Gauss Legandre
-			;
+			out = chap4.gauss(F,a,b,h);
 		case 6 %Customized Simpson
-			;
-	end
+			a=1;
+    end
+    if ischar(out)
+        'print the error'
+    else
+        printLatex(sprintf(sprintf('Final answer = $%%.%df$',precision), out))
+    end
 else
-	x = handles.editX.String;
-	degree = handles.editDegree.String;
-	h = handles.editH2.String;
+	x = str2num(handles.editX.String);
+	degree = str2num(handles.editDegree.String);
+	h = str2num(handles.editH2.String);
 	richardson = handles.richardson.Value;
-	error = handles.editError.String;
+	error = str2num(handles.editError.String);
 	
 	value = handles.curveMethod.SelectedObject; %Formula Method
 	
 	switch value
 		case handles.formula1 %O(h^2)
-			disp(1);
+			chap4.diff(F,x,degree,2,h);
 		case handles.formula2 %O(h^4)
-			disp(2);
-	end
+			chap4.diff(F,x,degree,4,h);
+    end
+    if richardson
+        %do something
+    end
 end
 
 
