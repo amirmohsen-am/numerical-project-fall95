@@ -188,8 +188,10 @@ value = hObject.Value;
 
 if value == 4 || value == 5
 	handles.text17.String = 'n:';
+    handles.editH1.String = '4';
 else
 	handles.text17.String = 'h:';
+    handles.editH1.String = '0.1';
 end
 
 
