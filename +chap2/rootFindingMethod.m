@@ -41,11 +41,11 @@ classdef rootFindingMethod
                     break;
                 end
                 res = obj.getNext(F,x0,x1,y0,y1);
-                x0=res(1);
-                x1=res(2);
+                x0=eval(vpa(res(1),digits));
+                x1=eval(vpa(res(2),digits));
                 
-                y0 = eval(subs(F,'x',x0));
-                y1 = eval(subs(F,'x',x1));
+                y0 = eval(vpa(eval(subs(F,'x',x0)),digits));
+                y1 = eval(vpa(eval(subs(F,'x',x1)),digits));
                 p0 = plot(x0,y0,'go');
                 p1 = plot(x1,y1,'go');
                 

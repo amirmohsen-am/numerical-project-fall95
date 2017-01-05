@@ -28,7 +28,7 @@ for i=1:steps+1
         texty = texty-folan_step;
     end
     axes(handles.axesPlot);
-    initial_values = eval(initial_values - subs(inv(Jacobian)*F,sym_values,initial_values));
+    initial_values = eval(vpa(eval(initial_values - subs(inv(Jacobian)*F,sym_values,initial_values)),digits));
 end
 
 % plot(initial_values(1),initial_values(2),'ro');
