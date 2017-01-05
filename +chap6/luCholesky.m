@@ -8,6 +8,7 @@ function [ X, L, U, Atranspose, Y, newA, newB, n, singular ] = luCholesky( A, B,
      singular = 0;
     if (  abs(det(A)) < 1e-8   )
         singular = 1;
+        errordlg('Matrix is singular', 'Input Error');
         return;
     end
     

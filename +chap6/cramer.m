@@ -9,6 +9,7 @@ function [ X, detA, Ai, detAi, n, singular ] = cramer( A, B, printLatex)
     singular = 0;
     if (  abs(detA) < 1e-5   )
         singular = 1;
+        errordlg('Matrix is singular', 'Input Error');
         return;
     end
     
@@ -26,9 +27,8 @@ function [ X, detA, Ai, detAi, n, singular ] = cramer( A, B, printLatex)
     
     
     %printlatex
-    
     chap6.printOutput(X,n, printLatex);
-    
+   
     
 end
 

@@ -10,6 +10,7 @@ function [ X, L, U, P, Y, PA, PB, singular] = luCrout( A,B, printLatex)
      singular = 0;
     if (  abs(det(A)) < 1e-8   )
         singular = 1;
+        errordlg('Matrix is singular', 'Input Error');
         return;
     end
     
