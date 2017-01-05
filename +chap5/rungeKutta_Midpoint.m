@@ -5,8 +5,8 @@ function answer = rungeKutta_Midpoint(f, initial, h)
     a = initial(1);
     b = initial(2);
     
-    k1 = h * eval(subs(F, {x, y(x)}, {a, b}));
-    k2 = h * eval(subs(F, {x, y(x)}, {a + (h/2), b + (k1/2)}));
+    k1 = eval(vpa(h * eval(vpa(eval(subs(F, {x, y(x)}, {a, b}))))));
+    k2 = eval(vpa(h * eval(vpa(eval(subs(F, {x, y(x)}, {a + (h/2), b + (k1/2)}))))));
 
-    answer = b + k2;
+    answer = eval(vpa(b + k2));
 end
