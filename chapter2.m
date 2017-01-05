@@ -173,8 +173,8 @@ xlimit2 = [x0-xlen/5, x1+xlen/5];
 xlim(xlimit2);
 
 %fplot(@(x) 0,xlimit,'r--')
-%plot(xlimit, [0, 0], 'r--');
-%fplot(F,xlimit,'b')
+plot(xlimit, [0, 0], 'r--');
+fplot(F,xlimit,'b')
 
 sol = method.findRoot(F,x0,x1, steps, handles);
 %set(handles.textAns, 'String', sol{1})
