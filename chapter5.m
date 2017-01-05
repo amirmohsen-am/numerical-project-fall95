@@ -113,7 +113,7 @@ function printLatex(str)
 	laxes = gca;
     axes(globalHandles.axesLog);
 	global texty
-	step = 0.2;
+	step = 0.05;
 	text(0.05, texty-step/2, str, 'Interpreter', 'latex');
 	texty = texty-step;
     axes(laxes);
@@ -242,7 +242,7 @@ if (handles.buttonMethod.SelectedObject == handles.part1)
 end
 
 method = 0;
-if part1 == 0
+if part1 == 1
 	method = handles.listbox3.Value-1;
 else
 	method = handles.listbox4.Value+7;
@@ -261,7 +261,8 @@ initial = [x0 y0 yp0];
 
 steps = NaN;
 
-chap5.chap5(F, initial, h, n, steps, y, method);
+out = chap5.chap5(F, initial, h, n, steps, y, method);
+printLatex2(out);
 
 function editSteps_Callback(hObject, eventdata, handles)
 % hObject    handle to editSteps (see GCBO)
