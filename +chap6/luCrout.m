@@ -1,4 +1,4 @@
-function [ X, L, U, P, Y, PA, PB] = luCrout( A,B)
+function [ X, L, U, P, Y, PA, PB, singular] = luCrout( A,B, printLatex)
         
     n = size(B, 1);
     X = zeros(n, 1);
@@ -6,6 +6,12 @@ function [ X, L, U, P, Y, PA, PB] = luCrout( A,B)
     U = zeros(n);
     Y = zeros(n, 1);
     P = eye(n);
+    
+     singular = 0;
+    if (  abs(det(A)) < 1e-8   )
+        singular = 1;
+        return;
+    end
     
     for i = 1: n
         U(i,i) = 1;
@@ -67,7 +73,12 @@ function [ X, L, U, P, Y, PA, PB] = luCrout( A,B)
      PA = A;
      PB = B;
     
-    
+    z = 'x1 = ';
+    z = strcat(z, num2str( X(1)) , ' ');
+    for i = 2:n
+        z = strcat(z,', x',num2str(i), ' = ', num2str( X(i)));
+    end
+    printLatex( z );
      
 end
 

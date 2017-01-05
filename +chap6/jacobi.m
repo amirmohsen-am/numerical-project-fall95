@@ -1,8 +1,15 @@
-function [ X, answer, newA, newB, n, isSDD ] = jacobi( A, B, steps, initial)
+function [ X, answer, newA, newB, n, isSDD, singular ] = jacobi( A, B, steps, initial, printLatex)
 
     n = size(B, 1);
     answer = zeros(n, steps+1);
     answer(:, 1) = initial;
+    
+     singular = 0;
+    if (  abs(det(A)) < 1e-8   )
+        singular = 1;
+        return;
+    end
+    
     
     isSDD = chap6.checkSDD(A); %% if isSDD is 1 then the matrix is strictly diagonally dominant, otherwise it's not
     
@@ -27,5 +34,15 @@ function [ X, answer, newA, newB, n, isSDD ] = jacobi( A, B, steps, initial)
     X = answer(:, steps+1);
     newA = A;
     newB = B;
+    
+    z = 'x1 = ';
+    z = strcat(z, num2str( X(1)) , ' ');
+    for i = 2:n
+        z = strcat(z,', x',num2str(i), ' = ', num2str( X(i)));
+    end
+    printLatex( z );
+    
+    
+    
 end
 
