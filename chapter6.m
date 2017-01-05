@@ -22,7 +22,7 @@ function varargout = chapter6(varargin)
 
 % Edit the above text to modify the response to help chapter6
 
-% Last Modified by GUIDE v2.5 05-Jan-2017 21:28:14
+% Last Modified by GUIDE v2.5 05-Jan-2017 22:55:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -257,30 +257,44 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 if (handles.buttonMethod.SelectedObject == handles.part1)
 	steps = str2num(handles.editSteps.String);
-	guess = str2num(handles.editGuess.String);
+	initial = str2num(handles.editGuess.String);
+	
+	data = handles.uitable1.Data;
+	n = length(data)-1;
+	A = data(:,1:n);
+	B = data(:,n+1);
+	
+	
 	value = handles.listbox3.Value;
 	switch value
 		case 1 %Cramer
-			;
+			chap6.cramer(A, B, @printLatex);
 		case 2 %Gausse Elimination
-			;
+			chap6.gauss(A, B, @printLatex);
 		case 3 %LU Doolittle
-			;
+			chap6.luDoolittle(A, B, @printLatex);
 		case 4 %LU Cholesky
-			;
+			chap6.luCholesky(A, B, @printLatex);
 		case 5 %LU Crout
-			;
+			chap6.luCrout(A, B, @printLatex);
 		case 6 %Jacobi
-			;
+			chap6.jacobi(A, B, steps, initial, @printLatex);
 		case 7 %Gauss Seidel
-			;
-		;
+			chap6.gaussSeidel(A, B, steps, initial, @printLatex);
 	end
 else
 	mat = str2mat(handles.editInput.String);
 	powermethod = handles.powermethod.Value;
 	
-	;
+	if powermethod == 0
+		chap6.eigen(mat, @printLatex);
+	else
+		steps = str2num(handles.editSteps2.String);
+		initial = str2num(handles.editGuess2.String);
+		
+		chap6.powerMethod(mat, steps, initial, @printLatex);
+	end
+	
 end
 
 
@@ -402,3 +416,55 @@ function powermethod_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of powermethod
+
+if hObject.Value == 0
+	handles.uipanel10.Visible = 'off';
+else
+	handles.uipanel10.Visible = 'on';
+end
+
+
+
+function editGuess2_Callback(hObject, eventdata, handles)
+% hObject    handle to editGuess2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editGuess2 as text
+%        str2double(get(hObject,'String')) returns contents of editGuess2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editGuess2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editGuess2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function editSteps2_Callback(hObject, eventdata, handles)
+% hObject    handle to editSteps2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editSteps2 as text
+%        str2double(get(hObject,'String')) returns contents of editSteps2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editSteps2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editSteps2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
