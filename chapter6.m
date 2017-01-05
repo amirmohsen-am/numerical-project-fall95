@@ -268,19 +268,19 @@ if (handles.buttonMethod.SelectedObject == handles.part1)
 	value = handles.listbox3.Value;
 	switch value
 		case 1 %Cramer
-			chap6.cramer(A, B, @printLatex);
+			chap6.cramer(A, B, @printLatex2);
 		case 2 %Gausse Elimination
-			chap6.gauss(A, B, @printLatex);
+			chap6.gauss(A, B, @printLatex2);
 		case 3 %LU Doolittle
-			chap6.luDoolittle(A, B, @printLatex);
+			chap6.luDoolittle(A, B, @printLatex2);
 		case 4 %LU Cholesky
-			chap6.luCholesky(A, B, @printLatex);
+			chap6.luCholesky(A, B, @printLatex2);
 		case 5 %LU Crout
-			chap6.luCrout(A, B, @printLatex);
+			chap6.luCrout(A, B, @printLatex2);
 		case 6 %Jacobi
-			chap6.jacobi(A, B, steps, initial, @printLatex);
+			chap6.jacobi(A, B, steps, initial, @printLatex2);
 		case 7 %Gauss Seidel
-			chap6.gaussSeidel(A, B, steps, initial, @printLatex);
+			chap6.gaussSeidel(A, B, steps, initial, @printLatex2);
 	end
 else
 	str = strjoin(handles.editInput.String);
@@ -288,12 +288,12 @@ else
 	powermethod = handles.powermethod.Value;
 	
 	if powermethod == 0
-		chap6.eigen(mat, @printLatex);
+		chap6.eigen(mat, @printLatex2);
 	else
 		steps = str2num(handles.editSteps2.String);
 		initial = eval(handles.editGuess2.String);
 		
-		chap6.powerMethod(mat, steps, initial, @printLatex);
+		chap6.powerMethod(mat, steps, initial, @printLatex2);
 	end
 	
 end
