@@ -267,8 +267,6 @@ end
 
 out = chap5.chap5(F, initial, h, n, steps, y, method);
 printLatex2(out);
-a = [1 2; 3 4];
-printLatex2(latex(sym(a)))
 
 function editSteps_Callback(hObject, eventdata, handles)
 % hObject    handle to editSteps (see GCBO)
