@@ -504,6 +504,12 @@ else
     end
 end
 
+% --- Executes when selected object is changed in curveMethod.
+function curveMethod_SelectionChangedFcn(hObject, eventdata, handles)
+% hObject    handle to the selected object in curveMethod 
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% 
 
 % --- Executes on button press in formula1.
 function formula1_Callback(hObject, eventdata, handles)
