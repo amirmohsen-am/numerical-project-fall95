@@ -26,5 +26,16 @@ function [ dominant, dominantVector, values, vectors ] = powerMethod( A, steps, 
             printLatex(z);
         end
         
+        printLatex('Steps: ');
+        for i = 1:steps
+           printLatex(strcat('c = ', num2str(values(i))));
+%            printLatex('');
+           printLatex(latex(sym(vectors(:,i), 'd')));
+%            printLatex('');
+%            printLatex('');
+%            printLatex('');
+            
+        end
+        
 end
 
