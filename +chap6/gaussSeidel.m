@@ -40,7 +40,13 @@ function [ X, answer, newA, newB, n, isSDD, singular ] = gaussSeidel( A, B, step
     
         chap6.printOutput(X,n, printLatex);
 
-    
+    for i = 2:steps+1
+               printLatex(strcat('Step ', num2str(i-1)));
+            for j = 1:n
+                txt1 = strcat('x_',num2str(j),'^',num2str(i-1), ' = ', num2str(answer(j,i)));
+                printLatex(txt1);
+            end
+     end
                         
 
 end

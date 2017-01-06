@@ -57,7 +57,18 @@ function [ X, L, U, Atranspose, Y, newA, newB, n, singular ] = luCholesky( A, B,
     %print latex
     
         chap6.printOutput(X,n, printLatex);
-
+        printLatex('Steps: ');
+        printLatex( strcat('L = ', latex(sym(L,'d')))  );
+%         printLatex('');
+%         printLatex('');
+%         printLatex('');
+%         printLatex('');
+        printLatex(strcat('U = ', latex(sym(U,'d')))  );
+%         printLatex('');
+%         printLatex('');
+%         printLatex('');
+%         printLatex('');
+        printLatex(strcat('Y = ', latex(sym(Y,'d')))  );
     
 end
 

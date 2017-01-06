@@ -54,13 +54,13 @@ function [ X, reduced, n, singular] = gauss( A, B, printLatex )
         chap6.printOutput(X,n, printLatex);
         printLatex('Steps: ');
         for i = 1: n
-%            printLatex('');
-%             printLatex('');
-%             printLatex('');
-%             printLatex('');
-%             printLatex('');
-%             printLatex('');
-            printLatex( strcat('\\\rightarrow',  latex(sym(reduced(:,:,i),'d' ))));
+           printLatex('');
+            printLatex('');
+            printLatex('');
+            printLatex('');
+            printLatex('');
+            printLatex('');
+            printLatex( latex(sym(reduced(:,:,i),'d')));
            
         end
     

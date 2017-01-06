@@ -28,23 +28,7 @@ function [ X, detA, Ai, detAi, n, singular ] = cramer( A, B, printLatex)
     
     %printlatex
     chap6.printOutput(X,n, printLatex);
-    printLatex('Steps:');
-    
-    printLatex( strcat('det(A) = ',num2str(eval(detA))));
-    for i = 1:n
-%         printLatex('');
-%         printLatex('');
-%         printLatex('');
-%         printLatex('');
-        txt1 = strcat( 'A_', num2str(i),' :', latex(sym(Ai(:,:,i), 'd')),'\\\rightarrow ');
-        txt2 = strcat(' det A_', num2str(i),' = ', num2str(detAi(i)) );
-        printLatex(strcat(txt1, txt2));
-%         printLatex('');
-%         printLatex('');
-%         printLatex('');
-%         printLatex('');
-%         printLatex(    );
-    end
+    printLatex(strcat(, '\rightarrow'latex(sym(A))));
     
     
 end

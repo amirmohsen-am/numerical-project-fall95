@@ -35,14 +35,12 @@ function [ X, answer, newA, newB, n, isSDD, singular ] = jacobi( A, B, steps, in
     X = answer(:, steps+1);
     newA = A;
     newB = B;
-    
         chap6.printOutput(X,n, printLatex);
-        
-        for i = 2:steps+1
-               printLatex(strcat('Step ', num2str(i-1)));
+        printLatex('Steps: ');
+        for i = 2:steps
             for j = 1:n
-                txt1 = strcat('x_',num2str(j),'^',num2str(i-1), ' = ', num2str(answer(j,i)));
-                printLatex(txt1);
+            txt1 = sprintf('x_%d^(%d) = %f',j,i-1, num2str(answer(j, i)));
+            printLatex(txt1);
             end
         end
         
