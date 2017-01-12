@@ -85,6 +85,9 @@ t.RowName = rname;
 t.ColumnName = cname;
 t.ColumnEditable = true;
 
+global cache;
+cache = {};
+
 
 
 
@@ -133,8 +136,8 @@ function printLatex(str)
     axes(globalHandles.axesLog);
 	global texty
 	step = 0.05;
-	text(0.05, texty-step/2, str, 'Interpreter', 'latex');
-	texty = texty-step;
+	text(0.05, texty-step/2, str, 'Interpreter', 'latex', 'verticalAlignment', 'top');
+	%texty = texty-step;
     axes(laxes);
 	
 	min = globalHandles.slider2.Min;
@@ -142,8 +145,23 @@ function printLatex(str)
 		globalHandles.slider2.Min = min*2;
 	end;
 
+
+function printLatexCache(str)
+	global cache;
+	str = strcat('$$', str, '$$');
+	cache = [cache {str}];
+	
+
+function printFlush()
+	global cache;
+	%disp(cache);
+	printLatex(cache);
+	cache = {};
+	
+
 function printLatex2(str)
-	printLatex(strcat('$', str, '$'));
+	str = strcat('$$', str, '$$');
+	printLatex(str);
 
 
 % --- Executes on key press with focus on uitable1 and none of its controls.
@@ -255,6 +273,14 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+axes(handles.axesLog);
+cla;
+
+global precision;
+digits(precision);
+
+printFunction = @printLatexCache;
+
 if (handles.buttonMethod.SelectedObject == handles.part1)
 	steps = str2num(handles.editSteps.String);
 	initial = eval(handles.editGuess.String);
@@ -264,23 +290,22 @@ if (handles.buttonMethod.SelectedObject == handles.part1)
 	A = data(:,1:n);
 	B = data(:,n+1);
 	
-	
 	value = handles.listbox3.Value;
 	switch value
 		case 1 %Cramer
-			chap6.cramer(A, B, @printLatex2);
+			chap6.cramer(A, B, printFunction);
 		case 2 %Gausse Elimination
-			chap6.gauss(A, B, @printLatex2);
+			chap6.gauss(A, B, printFunction);
 		case 3 %LU Doolittle
-			chap6.luDoolittle(A, B, @printLatex2);
+			chap6.luDoolittle(A, B, printFunction);
 		case 4 %LU Cholesky
-			chap6.luCholesky(A, B, @printLatex2);
+			chap6.luCholesky(A, B, printFunction);
 		case 5 %LU Crout
-			chap6.luCrout(A, B, @printLatex2);
+			chap6.luCrout(A, B, printFunction);
 		case 6 %Jacobi
-			chap6.jacobi(A, B, steps, initial, @printLatex2);
+			chap6.jacobi(A, B, steps, initial, printFunction);
 		case 7 %Gauss Seidel
-			chap6.gaussSeidel(A, B, steps, initial, @printLatex2);
+			chap6.gaussSeidel(A, B, steps, initial, printFunction);
 	end
 else
 	str = strjoin(handles.editInput.String);
@@ -288,15 +313,17 @@ else
 	powermethod = handles.powermethod.Value;
 	
 	if powermethod == 0
-		chap6.eigen(mat, @printLatex2);
+		chap6.eigen(mat, printFunction);
 	else
 		steps = str2num(handles.editSteps2.String);
 		initial = eval(handles.editGuess2.String);
 		
-		chap6.powerMethod(mat, steps, initial, @printLatex2);
+		chap6.powerMethod(mat, steps, initial, printFunction);
 	end
-	
 end
+
+printFlush();
+
 
 
 
