@@ -12,7 +12,7 @@ function out = gauss(f, a, b, n, printLatex)
     xs = eval(vpa(xs*((b-a)/2) + (b+a)/2,digits));
     fs = eval(vpa(subs(f,xs),digits));
     for i=1:length(xs)
-        printLatex(sprintf('$$x_%d=%.*f , f_%d = %.*f $$', i,digits,eval(xs(i)), i ,digits,eval(fs(i))));
+        printLatex(sprintf('$$x_%d=%.*f , f_%d = %.*f $$', i,digits,xs(i), i ,digits,fs(i)));
     end
     out = sum(subs(f,xs).*weights)*(b-a)/2;
     out = eval(out);

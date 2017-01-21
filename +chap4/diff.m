@@ -53,7 +53,11 @@ function out = diff(f, p, degree, error, h, printLatex)
         elseif degree==4
             out = (-ev(3) + 12*ev(2) - 39*ev(1) + 56*ev(0) -39*ev(-1) + 12*ev(-2) - ev(-3))/(6*h^4);
             ez_print([3 2 1 0 -1 -2 -3]);
+        else
+            out = 'Only degree 1 to 4 is supported for error of O(h^4)';
         end
     end
-    out = eval(vpa(out,digits));
+    if ~ischar(out)
+        out = eval(vpa(out,digits));
+    end
 end

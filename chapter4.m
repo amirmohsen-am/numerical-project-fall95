@@ -497,23 +497,24 @@ if (handles.buttonMethod.SelectedObject == handles.integration)
 		case 5 %Gauss Legandre
 			out = chap4.gauss(F,a,b,h, @printLatex);
 		case 6 %Customized Simpson
-			n = (b-a)/h;
+			n = round((b-a)/h);
             if mod(n,2)==0
                 printLatex('N is even, using Simpson $\frac{1}{3}$');
-                out = chap4.simpsons3(F,a,b,h);
+                out = chap4.simpsons3(F,a,b,h, @printLatex2);
             else
                 printLatex('N is odd using:');
                 printLatex(sprintf('Simpson $\\frac{1}{3}$ for [%.4f, %.4f]',a,b-h*3));
+                out = chap4.simpsons3(F,a,b-h*3,h,@printLatex2);
                 printLatex(sprintf('Simpson $\\frac{3}{8}$ for [%.4f, %.4f]',b-h*3,b));
-                out = chap4.simpsons3(F,a,b-h*3,h);
-                out2 = chap4.simpsons8(F,b-h*3,b,h);
+                
+                out2 = chap4.simpsons8(F,b-h*3,b,h,@printLatex2);
                 out = out+out2;
             end
     end
     if ischar(out)
         errordlg(out, 'Input error');
     else
-        printLatex(sprintf(sprintf('Final answer = $%%.%df$',precision), out))
+        printLatex(sprintf('Final answer = $%.*f$',digits, out))
     end
 else
     
@@ -558,7 +559,11 @@ else
         printLatex(sprintf(sprintf('$$G = %%.%df$$',precision), G));
     else
         out = chap4.diff(F,x,degree,order,h,@printLatex2);
-        printLatex(sprintf(sprintf('Final answer $= %%.%df$',precision), out));
+        if ischar(out)
+            errordlg(out, 'Input error');
+        else
+            printLatex(sprintf('Final answer = $%.*f$',digits, out))
+        end
     end
 end
 

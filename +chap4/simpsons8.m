@@ -11,7 +11,7 @@ function out = simpsons8(f, a, b, h, printLatex)
     cnt = 0;
     for i=a:h:b
         cnt=cnt+1;
-        printLatex(sprintf('%df_{%d} = %.*f',m(cnt), cnt-1,digits, m(cnt)*out(cnt)))
+        printLatex(sprintf('%df_{%d} = %.*f',m(cnt), cnt-1,digits, m(cnt)*out(cnt)));
     end
     
     out = m.*out;
